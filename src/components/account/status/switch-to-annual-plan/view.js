@@ -91,6 +91,8 @@ class SwitchToAnnualPlan extends View {
   render() {
     console.log('SwitchToAnnualPlan render')
     // console.log(this.model.attributes)
+    console.log($('.switch-to-annual-plan-container').length)
+    debugger
     const data = {
       isPromoApplied: this.model.get('isPromoApplied') ? 'applied-success' : '',
       currSymbol: this.model.get('annualStripePlan').CurrSymbol,

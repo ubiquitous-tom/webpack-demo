@@ -39,6 +39,7 @@ class Workspace extends Router {
 
   execute(callback, args, name) {
     console.log('Router execute', callback, args, name)
+    this.removeOverlay()
     this.setActiveSidebar()
     this.ga.logPageView(name)
 
@@ -107,10 +108,25 @@ class Workspace extends Router {
     this.navigate('accountStatus', true)
   }
 
+  removeOverlay() {
+    // A hack to get default navigation to work with overlay
+    if ($('.account-overlay').length) {
+      console.log('Navigation Click navigate - Remove Overlay')
+      $('.account-overlay').remove()
+    }
+  }
+
   setActiveSidebar() {
     // A hack to get default navigation to work
+    const hash = !_.isEmpty(window.location.hash) ? window.location.hash : '#accountStatus'
     if (!$('ul li').hasClass('active')) {
-      const hash = !_.isEmpty(window.location.hash) ? window.location.hash : '#accountStatus'
+      $(`${hash}Nav`).addClass('active')
+    }
+
+    // A hack to get default navigation to work
+    const active = $('ul li.active a').attr('href')
+    if (active !== hash) {
+      $('.nav-tabs li').removeClass('active')
       $(`${hash}Nav`).addClass('active')
     }
   }
