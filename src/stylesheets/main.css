@@ -31,7 +31,7 @@ body {background: #0b1733;}
 .navbar-right-ul{float:right;width:110px;margin-top:0px;}
 .navbar-toggle .icon-bar {border-radius: 0;width: 15px;height:1px;}
 .log-in{color: #fff;display: inline-block;font-family: 'Futura PT Light',sans-serif;font-size: 10.3px;font-weight: normal;letter-spacing: 0.17em;margin-top: 20px;text-transform: uppercase;margin-right:0px;margin-left: 10px}
-.free-month{color: #fff;display: inline-block;font-family: 'Futura PT Light',sans-serif;font-size: 13.8px;font-weight: normal;letter-spacing: 0.17em;margin-top: 15px;text-transform: uppercase;padding:12px;background:rgba(11, 152, 184, 0.85) none repeat scroll 0 0;margin-left:8px;}
+.free-month{color: #000;display: inline-block;font-family: 'Futura PT Light',sans-serif;font-size: 13.8px;font-weight: normal;letter-spacing: 0.17em;margin-top: 15px;text-transform: uppercase;padding:12px;background:#EEF0E9;margin-left:8px;}
 #signup{margin-bottom:0px;}
 
 /* ACORN REBRANDING 2019-08-15 */

@@ -6,6 +6,8 @@ import template from './index.hbs'
 import EditEmailModel from './model'
 
 class EditEmail extends View {
+  regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+
   get el() {
     return 'section.account-wrap'
   }
@@ -86,6 +88,9 @@ class EditEmail extends View {
     } else if (e.target.validity.typeMismatch) {
       e.target.parentElement.classList.add('has-error')
       e.target.setCustomValidity(this.i18n.t('ENTER-AN-EMAIL'))
+    } else if (!this.regexEmail.test(e.target.value)) {
+      e.target.parentElement.classList.add('has-error')
+      e.target.setCustomValidity(this.i18n.t('INVALID-EMAIL-ERROR'))
     }
   }
 
@@ -98,6 +103,9 @@ class EditEmail extends View {
     if (e.target.validity.valueMissing) {
       e.target.parentElement.classList.add('has-error')
       e.target.setCustomValidity(this.i18n.t('EMAIL-IS-REQUIRED'))
+    } else if (!this.regexEmail.test(e.target.value)) {
+      e.target.parentElement.classList.add('has-error')
+      e.target.setCustomValidity(this.i18n.t('INVALID-EMAIL-ERROR'))
     } else {
       if (e.target.validity.typeMismatch) {
         e.target.parentElement.classList.add('has-error')

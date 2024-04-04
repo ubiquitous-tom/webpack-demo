@@ -14,6 +14,7 @@ class EditEmailModel extends Model {
   /* eslint consistent-return: 0 */
   /* eslint no-unused-vars: 0 */
   validate(attrs, options) {
+    const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
     console.log('EditEmailModel validate')
     console.log(attrs)
     // console.log(options)
@@ -26,6 +27,11 @@ class EditEmailModel extends Model {
     if (_.isEmpty(attrs.ConfirmedEmail)) {
       console.log('please confirm the email')
       return 'EMAIL-IS-REQUIRED'
+    }
+
+    if (!regexEmail.test(attrs.NewEmail) || !regexEmail.test(attrs.ConfirmedEmail)) {
+      console.log('Please provide a valid email address.')
+      return 'INVALID-EMAIL-ERROR'
     }
 
     if (attrs.NewEmail !== attrs.ConfirmedEmail) {
