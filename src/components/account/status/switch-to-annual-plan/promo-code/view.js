@@ -2,8 +2,10 @@ import { View } from 'backbone'
 import _ from 'underscore'
 
 import './stylesheet.scss'
+import PromoValidateModel from 'core/models/promo-validate'
 import SubmitLoader from 'shared/elements/submit-loader'
 import FlashMessage from 'shared/elements/flash-message'
+import Promo from 'shared/elements/promo'
 import template from './index.hbs'
 import PromoCodeModel from './model'
 // import ATVView from 'core/view'
@@ -34,9 +36,11 @@ class PromoCode extends View {
     this.switchToAnnualPlan = options.switchToAnnualPlan
     // this.confirmBilling = this.switchToAnnualPlan.confirmBilling
     // this.model = this.switchToAnnualPlan.model
-    this.model = new PromoCodeModel()
+    // this.model = new PromoCodeModel()
+    this.model = new PromoValidateModel(this.model.attributes)
     this.submitLoader = new SubmitLoader()
     this.flashMessage = new FlashMessage()
+    this.promoView = new Promo({ i18n: options.i18n })
     // this.listenTo(this.model, 'change', this.render)
     // this.render()
 
@@ -84,10 +88,12 @@ class PromoCode extends View {
     // console.log(this.$el[0])
     // console.log(this.$el.find('.switch-to-annual-plan-container')[0])
     // console.log(this.$el.find('#promocode-container')[0])
-    const html = this.template(this.model.attributes)
+    const html = this.template()
     // console.log(html)
     this.$el.find('#promocode-container').append(html)
     // this.$el.html(html)
+
+    this.setPresetOptions()
   }
 
   promocodeToggle(e) {
@@ -122,8 +128,15 @@ class PromoCode extends View {
     e.preventDefault()
     console.log(e)
     this.loadingStart()
-    const promoCode = this.$el.find('input#promocode').val()
-    this.model.submit(promoCode)
+    // const promoCode = this.$el.find('input#promocode').val()
+    const data = {
+      Code: this.$el.find('input#promocode').val(),
+      Country: this.model.get('stripePlansCountry'),
+      CustomerID: (this.model.has('Customer') && this.model.get('Customer').CustomerID) || '',
+      PlanID: this.model.get('monthlyStripePlan').PlanID, // `monthly` because we are upgrading.
+    }
+    console.log(data)
+    this.model.submit(data)
   }
 
   // This function is called in SwitchToAnnualPlan() View
@@ -176,6 +189,21 @@ class PromoCode extends View {
   loadingStop() {
     this.$el.find('#promocode-container input').prop('disabled', false)
     this.submitLoader.loadingStop(this.$el.find('#promocode-container button[type="submit"]'))
+  }
+
+  setPresetOptions() {
+    console.log(sessionStorage.getItem('acorntv_st_pmc'))
+    if (sessionStorage.getItem('acorntv_st_pmc')) {
+      // debugger
+      this
+        .$('#promocode')
+        .val(sessionStorage.getItem('acorntv_st_pmc'))
+      this
+        .$('#promocode-field button')
+        .click()
+
+      this.promoView.removePresetOptions()
+    }
   }
 }
 

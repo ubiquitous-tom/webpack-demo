@@ -25,32 +25,50 @@ class Header extends View {
 
   initialize(options) {
     console.log('Header initialize')
-    // this.model = new HeaderModel()
-    this.router = new Router()
+    // this.router = new Router()
+    this.i18n = options.i18n
 
-    const isWebPaymentEdit = this.model.get('Customer').webPaymentEdit
-    const isTigo = this.model.get('Membership').Store === 'Tigo'
-    this.model.set({
-      atvlogo,
-      navigation: {
-        emailSection: isWebPaymentEdit || isTigo,
-      },
+    const attributes = {
+      environment: this.model.get('environment'),
+      isUK: this.model.get('isUK'),
+      isAU: this.model.get('isAU'),
+    }
+    this.headerModel = new HeaderModel(attributes)
+
+    this.listenTo(this.headerModel, 'change:headerNavSuccess', (model, value) => {
+      console.log(model, value)
+      // debugger
+      if (value) {
+        this.renderHeaderLinks()
+      }
     })
 
-    this.i18n = options.i18n
-    this.model = new HeaderModel(this.model.attributes)
-    // this.model.set('atvlogo', atvlogo)
-    // this.render()
-    this.listenTo(this.model, 'change:headerNavSuccess', this.render)
+    this.render()
   }
 
   render() {
     console.log('Header render')
     // https://gist.github.com/kyleondata/3440492
     // const template = Handlebars.compile(this.template)
-    console.log(this.model.attributes)
+    console.log(this.model.attributes, this.headerModel.attributes)
     // debugger
-    const html = this.template(this.model.attributes)
+
+    const isLoggedIn = this.model.has('Session') ? this.model.get('Session').LoggedIn : false
+    const isWebPaymentEdit = this.model.has('Customer') && this.model.get('Customer').webPaymentEdit
+    const isTigo = this.model.get('Membership').Store === 'Tigo'
+
+    const attributes = {
+      isLoggedIn,
+      isWebPaymentEdit,
+      signupEnv: this.model.get('signupEnv'),
+      environment: this.model.get('environment'),
+      atvlogo,
+      navigation: {
+        emailSection: isWebPaymentEdit || isTigo,
+      },
+      navData: this.headerModel.has('navData') ? this.headerModel.get('navData') : null,
+    }
+    const html = this.template(attributes)
     // console.log(html)
     this.$el.html(html)
 
@@ -59,6 +77,15 @@ class Header extends View {
     this.activateNavigation()
 
     return this
+  }
+
+  renderHeaderLinks() {
+    const navData = this.headerModel.get('navData')
+    let html = ''
+    _.each(navData, (element) => {
+      html += `<li><a href="${element.headerNavURL}">${this.i18n.t(element.i18nKey)}</a></li>`
+    })
+    this.$('ul.nav').append(html)
   }
 
   navigate(e) {

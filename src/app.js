@@ -44,7 +44,7 @@ $(() => {
 
       console.log('main entry')
       new Navigation({ model })
-      new Header({ model })
+      new Header({ model, i18n })
       new Footer({ model: localeModel, i18n })
 
       Backbone.history.start()

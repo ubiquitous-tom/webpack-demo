@@ -34,7 +34,7 @@ class SwitchToAnnualPlan extends View {
     this.flashMessage = new FlashMessage()
     this.model = new SwitchToAnnualPlanModel(options.monthlyPlan.attributes)
     this.confirmBilling = new ConfirmBilling({ switchToAnnualPlan: this, i18n: this.i18n })
-    this.promoCode = new PromoCode({ switchToAnnualPlan: this, i18n: this.i18n })
+    this.promoCode = new PromoCode({ model: this.model, switchToAnnualPlan: this, i18n: this.i18n })
     console.log(this)
     this.render()
 

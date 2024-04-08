@@ -40,6 +40,7 @@ class InitializeApp extends Model {
     this.set({
       environment: this.environment(),
       signinEnv: this.signinEnv(),
+      signupEnv: this.signupEnv(),
       storeEnv: this.storeEnv(),
       currentLanguage: docCookies.getItem('ATVLocale') || 'en',
     })
@@ -71,7 +72,7 @@ class InitializeApp extends Model {
   environment() {
     let env = ''
     if (window.location.hostname.indexOf('dev') > -1) {
-      env = 'dev.'
+      env = 'dev3.'
     }
     if (window.location.hostname.indexOf('qa') > -1) {
       env = 'qa.'
@@ -83,6 +84,10 @@ class InitializeApp extends Model {
   }
 
   signinEnv() {
+    return `${window.location.protocol}//${window.location.hostname.replace('account', 'signup')}`
+  }
+
+  signupEnv() {
     return `${window.location.protocol}//${window.location.hostname.replace('account', 'signup')}`
   }
 

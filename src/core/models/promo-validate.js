@@ -1,30 +1,26 @@
-import ATVModel from 'core/model'
+import { Model } from 'backbone'
 import _ from 'underscore'
 
-class PromoCodeModel extends ATVModel {
+class PromoValidateModel extends Model {
   get url() {
     const env = this.environment()
     return `https://${env}api.rlje.net/acorn/promo/validate`
   }
 
   initialize() {
-    console.log('PromoCodeModel initialize')
+    console.log('PromoValidateModel initialize')
+    console.log(this)
   }
 
   parse(resp) {
-    console.log('PromoCodeModel parse')
+    console.log('PromoValidateModel parse')
     console.log(resp)
   }
 
   /* eslint consistent-return: 0 */
   validate(attributes, options) {
-    console.log('PromoCodeModel validate')
+    console.log('PromoValidateModel validate')
     console.log(attributes, options)
-
-    if (_.isEmpty(attributes.sessionID)) {
-      console.log('please enter session ID')
-      return 'please enter session ID'
-    }
 
     if (_.isEmpty(attributes.promoCode)) {
       console.log('please enter promo code')
@@ -32,10 +28,15 @@ class PromoCodeModel extends ATVModel {
     }
   }
 
-  submit(promoCode) {
-    console.log('PromoCodeModel submit')
+  submit(data) {
+    console.log('PromoValidateModel submit')
+    // const { PlanID } = data
+    // this.set({
+    //   currentPlanID: PlanID,
+    // })
+
     const options = {
-      url: [this.url, $.param({ Code: promoCode })].join('?'),
+      url: [this.url, $.param(data)].join('?'),
       context: this,
       dataType: 'json',
       ajaxSync: true,
@@ -48,18 +49,23 @@ class PromoCodeModel extends ATVModel {
   }
 
   success(model, resp, options) {
-    console.log('PromoCodeModel success')
+    console.log('PromoValidateModel success')
     console.log(model, resp, options)
     console.log(this)
     debugger
+    this.set({ promo: resp }, { silent: true })
     this.set({
       promoCodeSuccess: true,
+      // promo: resp,
       promoCode: resp.PromotionCode,
+      promoName: resp.Name,
       promoAppliedAmount: resp.StripePercentOff,
       flashMessage: {
         type: 'success',
         // message: `PROMO APPLIED - ${resp.Name}`,
-        message: 'PROMO-APPLIED-OFF',
+        // message: 'PROMO-APPLIED-OFF',
+        // message: `${resp.PromotionCode} applied. Enjoy your ${resp.StripePercentOff}% off!`,
+        message: this.promoMessageParser(),
         interpolationOptions: {
           promoCode: resp.Name,
         },
@@ -68,16 +74,15 @@ class PromoCodeModel extends ATVModel {
   }
 
   error(model, resp, options) {
-    console.log('PromoCodeModel error')
+    console.log('PromoValidateModel error')
     console.log(model, resp, options)
     console.log(this)
-    debugger
-    let message = ''
+    // debugger
+    let message = 'PROMOCODE-ERROR'
     /* eslint function-paren-newline: 0 */
     resp
       .then(
         (response) => {
-          debugger
           console.log(response.responseJSON, response.responseText)
           if (!_.isEmpty(response.responseJSON)) {
             message = response.responseJSON.message
@@ -90,7 +95,6 @@ class PromoCodeModel extends ATVModel {
           return message
         },
         (error) => {
-          debugger
           console.log(error.responseJSON, error.responseText)
           if (!_.isEmpty(error.responseJSON)) {
             message = error.responseJSON.error
@@ -103,7 +107,10 @@ class PromoCodeModel extends ATVModel {
           return message
         })
       .always(() => {
-        debugger
+        // New Error handing for the update promocode of 2024. [DWT1-932]
+        if (_.isObject(message)) {
+          message = Object.values(message)
+        }
         model.set({
           promoCodeSuccess: false,
           flashMessage: {
@@ -114,6 +121,43 @@ class PromoCodeModel extends ATVModel {
         })
         console.log(model.get('flashMessage').message, model.get('flashMessage').type)
       })
+  }
+
+  promoMessageParser() {
+    // 3 types of promo code duration
+    // - forever (through the life time of the subscription)
+    // - repeating (usually each specified duration of the provided month(s))
+    // - once of `empty` (one time thing. usually a gift code)
+    const promo = this.get('promo') || this.get('membershipPromo')
+    const type = (this.get('currentPlanID') === this.get('monthlyStripePlan').PlanID)
+      ? 'monthly'
+      : 'annual'
+    // debugger
+    const promoCode = promo.PromotionCode
+    let promoDuration = ''
+    if (promo.StripeDuration && (type === 'monthly')) {
+      if (promo.StripeDuration === 'repeating' || promo.StripeDuration === 'once') {
+        if (promo.StripeDurationInMonths) {
+          const months = (promo.StripeDurationInMonths > 1) ? 'months' : 'month'
+          promoDuration = ` for ${promo.StripeDurationInMonths} ${months}`
+        }
+      }
+    }
+
+    // 3 types of promo code
+    // - gift code (free annual subscription code)
+    // - percentage off code
+    // - fixed amount off code
+    let promoMessage = ''
+    if (promo.StripePercentOff) {
+      promoMessage = `Enjoy your ${promo.StripePercentOff}% off${promoDuration}!`
+    }
+    if (promo.StripeAmountOff) {
+      const { CurrSymbol } = this.get('gifting').get('gift')
+      promoMessage = `Enjoy your ${CurrSymbol}${promo.StripeAmountOff} off${promoDuration}`
+    }
+
+    return `${promoCode} applied. ${promoMessage}`
   }
 
   environment() {
@@ -132,4 +176,4 @@ class PromoCodeModel extends ATVModel {
   }
 }
 
-export default PromoCodeModel
+export default PromoValidateModel

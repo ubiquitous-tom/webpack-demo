@@ -1,5 +1,7 @@
 import { View } from 'backbone'
 
+import Promo from 'shared/elements/promo'
+
 import './stylesheet.scss'
 import template from './index.hbs'
 
@@ -28,6 +30,8 @@ class AccountHome extends View {
     console.log(this.model.attributes)
     this.i18n = options.i18n
     this.model = new AccountHomeModel(this.model.attributes)
+    this.promoView = new Promo({ i18n: options.i18n })
+    this.promoView.getPresetOptions()
     // console.log(this.model)
     // this.render()
     this.listenTo(this.model, 'sync error', this.render)

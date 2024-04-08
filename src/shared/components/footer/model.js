@@ -1,4 +1,4 @@
-// import _ from 'underscore'
+import _ from 'underscore'
 import docCookies from 'doc-cookies'
 // import ATVLocale from 'core/models/locale'
 import ATVModel from 'core/model'
@@ -136,7 +136,7 @@ class FooterModel extends ATVModel {
   environment() {
     let env = ''
     if (window.location.hostname.indexOf('dev') > -1) {
-      env = 'dev.'
+      env = 'dev3.'
     }
     if (window.location.hostname.indexOf('qa') > -1) {
       env = 'qa.'

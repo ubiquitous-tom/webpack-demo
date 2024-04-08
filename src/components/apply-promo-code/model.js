@@ -1,14 +1,39 @@
 import { Model } from 'backbone'
 import _ from 'underscore'
 
+import StripePlans from 'core/models/stripe-plans'
+
 class ApplyPromoCodeModel extends Model {
-  get url() {
-    return '/applypromo'
-  }
+  // get url() {
+  //   return '/applypromo'
+  // }
 
   initialize() {
     console.log('ApplyPromoCodeModel initialize')
     this.model = new Model()
+    this.stripePlans = new StripePlans()
+    this.stripePlans.on('change:stripePlans', (model, value) => {
+      console.log(model, value)
+      this.set({
+        stripePlans: value,
+        stripePlansCountry: model.get('stripePlansCountry'),
+        stripePlansLang: model.get('stripePlansLang'),
+      })
+      // debugger
+    })
+
+    this.stripePlans.on('change:annualStripePlan', (model, value) => {
+      console.log(model, value)
+      this.set('annualStripePlan', value)
+      // debugger
+    })
+
+    this.stripePlans.on('change:monthlyStripePlan', (model, value) => {
+      console.log(model, value)
+      this.set('monthlyStripePlan', value)
+      // debugger
+      // this.getTrialEndDate()
+    })
   }
 
   /* eslint consistent-return: 0 */
@@ -32,27 +57,27 @@ class ApplyPromoCodeModel extends Model {
     return response
   }
 
-  applyCode(code, sessionID) {
-    console.log('ApplyPromoCodeModel applyCode')
-    console.log(this)
-    const attributes = {
-      Session: {
-        SessionID: sessionID,
-      },
-      PromoCode: {
-        Code: code,
-      },
-    }
-    const options = {
-      dataType: 'json',
-      ajaxSync: true,
-      wait: true,
-      success: this.success,
-      error: this.error,
-    }
-    console.log(attributes, options)
-    this.save(attributes, options)
-  }
+  // applyCode(code, sessionID) {
+  //   console.log('ApplyPromoCodeModel applyCode')
+  //   console.log(this)
+  //   const attributes = {
+  //     Session: {
+  //       SessionID: sessionID,
+  //     },
+  //     PromoCode: {
+  //       Code: code,
+  //     },
+  //   }
+  //   const options = {
+  //     dataType: 'json',
+  //     ajaxSync: true,
+  //     wait: true,
+  //     success: this.success,
+  //     error: this.error,
+  //   }
+  //   console.log(attributes, options)
+  //   this.save(attributes, options)
+  // }
 
   success(model, resp, options) {
     console.log('ApplyPromoCodeModel success')
