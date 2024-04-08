@@ -133,7 +133,7 @@ class PromoCode extends View {
       Code: this.$el.find('input#promocode').val(),
       Country: this.model.get('stripePlansCountry'),
       CustomerID: (this.model.has('Customer') && this.model.get('Customer').CustomerID) || '',
-      PlanID: this.model.get('monthlyStripePlan').PlanID, // `monthly` because we are upgrading.
+      PlanID: this.model.get('annualStripePlan').PlanID, // `annual` here because we are upgrading.
     }
     console.log(data)
     this.model.submit(data)
