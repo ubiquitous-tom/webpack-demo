@@ -2,6 +2,7 @@ import { View } from 'backbone'
 
 import './stylesheet.scss'
 import FlashMessage from 'shared/elements/flash-message'
+import Promo from 'shared/elements/promo'
 import placeholder from './placeholder.hbs'
 import template from './index.hbs'
 import AnnualPlanModel from '../annual-plan/model'
@@ -27,6 +28,8 @@ class CanceledPlan extends View {
     this.flashMessage = new FlashMessage()
     this.i18n = options.i18n
     this.model = new AnnualPlanModel(this.model.attributes)
+    this.promoView = new Promo({ i18n: this.i18n })
+    console.log(this.promoView.presetOptions)
     if (this.model.has('monthlyStripePlan')) {
       this.render()
     } else {
@@ -67,8 +70,16 @@ class CanceledPlan extends View {
     e.preventDefault()
     /* eslint max-len: 0 */
     // const startFreeTrialURL = `${this.model.get('signinEnv')}/trialsignup.jsp?OperationalScenario=STORE`
-    const reStartMembershipURL = `${this.model.get('storeEnv')}/#membership`
+    let reStartMembershipURL = `${this.model.get('storeEnv')}/#membership`
+    const presets = this.getPresetOptions()
+    const queryString = new URLSearchParams(presets).toString()
+    if (queryString) {
+      const parsedURL = new URL(reStartMembershipURL)
+      reStartMembershipURL = new URL(`${parsedURL.origin}${parsedURL.pathname}?${queryString}${parsedURL.hash}`)
+    }
+    debugger
     console.log(reStartMembershipURL)
+    this.promoView.removePresetOptions()
     window.location.assign(reStartMembershipURL)
   }
 
@@ -113,6 +124,21 @@ class CanceledPlan extends View {
     const d = new Date(0)
     d.setUTCMilliseconds(mmddyyObj)
     return this.model.formatDate(d)
+  }
+
+  getPresetOptions() {
+    const presets = {}
+    Object.entries(this.promoView.presetOptions).forEach((option) => {
+      // debugger
+      const [preset, sessionKey] = option
+      console.log(sessionStorage.getItem(sessionKey))
+      if (sessionStorage.getItem(sessionKey)) {
+        presets[preset] = sessionStorage.getItem(sessionKey)
+      }
+    })
+
+    console.log(presets)
+    return presets
   }
 }
 

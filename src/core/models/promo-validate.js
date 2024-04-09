@@ -153,7 +153,9 @@ class PromoValidateModel extends Model {
       promoMessage = `Enjoy your ${promo.StripePercentOff}% off${promoDuration}!`
     }
     if (promo.StripeAmountOff) {
-      const { CurrSymbol } = this.get('gifting').get('gift')
+      const subscription = (this.has('Subscription') && this.get('Subscription'))
+      const membershipType = (subscription.Annual) ? 'annual' : 'monthly'
+      const { CurrSymbol } = this.get(`${membershipType}StripePlan`)
       promoMessage = `Enjoy your ${CurrSymbol}${promo.StripeAmountOff} off${promoDuration}`
     }
 

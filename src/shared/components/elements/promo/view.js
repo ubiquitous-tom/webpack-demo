@@ -117,27 +117,6 @@ class Promo extends View {
       queryString = search
       const urlParamsSearch = new URLSearchParams(queryString)
 
-      // console.log(this.urlParamsSearch.has('promo'))
-      // console.log(this.urlParamsSearch.get('promo'))
-      // if (this.urlParamsSearch.has('promo')) {
-      //   const promoCode = this.urlParamsSearch.get('promo')
-      //   sessionStorage.setItem('acorntv_st_pmc', promoCode)
-      // }
-
-      // console.log(this.urlParamsSearch.has('promodisplay'))
-      // console.log(this.urlParamsSearch.get('promodisplay'))
-      // if (this.urlParamsSearch.has('promodisplay')) {
-      //   const promodisplay = this.urlParamsSearch.get('promodisplay')
-      //   sessionStorage.setItem('acorntv_st_pmd', promodisplay)
-      // }
-
-      // console.log(this.urlParamsSearch.has('plan'))
-      // console.log(this.urlParamsSearch.get('plan'))
-      // if (this.urlParamsSearch.has('plan')) {
-      //   const plan = this.urlParamsSearch.get('plan')
-      //   sessionStorage.setItem('acorntv_st_pmp', plan)
-      // }
-
       Object.entries(this.presetOptions).forEach((option) => {
         // debugger
         const [preset, sessionKey] = option
