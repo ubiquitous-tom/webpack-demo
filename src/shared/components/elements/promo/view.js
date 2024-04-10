@@ -9,6 +9,7 @@ class Promo extends View {
       promo: 'acorntv_st_pmc',
       promodisplay: 'acorntv_st_pmd',
       plan: 'acorntv_st_pmp',
+      type: 'acorntv_st_pmt',
     }
   }
 

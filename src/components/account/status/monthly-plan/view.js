@@ -2,6 +2,7 @@ import { View } from 'backbone'
 // import _ from 'underscore'
 // import Handlebars from 'handlebars'
 import FlashMessage from 'shared/elements/flash-message'
+import Promo from 'shared/elements/promo'
 
 import './stylesheet.scss'
 import placeholder from './placeholder.hbs'
@@ -30,6 +31,7 @@ class MonthlyPlan extends View {
     console.log(this, options)
     this.i18n = options.i18n
     this.model = new MonthlyPlanModel(this.model.attributes)
+    this.promoView = new Promo({ i18n: options.i18n })
     // this.getRenewalDate()
     console.log(this)
 
@@ -65,6 +67,8 @@ class MonthlyPlan extends View {
     const html = this.template(data)
     this.$el.html(html)
     // this.$el.html(this.template)
+
+    this.setPresetOptions()
 
     return this
   }
@@ -159,6 +163,19 @@ class MonthlyPlan extends View {
     // console.log(trialEnddateOjb)
     // this.set('trialEndDate', trialEnddateOjb)
     return trialEnddateOjb
+  }
+
+  setPresetOptions() {
+    console.log(sessionStorage.getItem('acorntv_st_pmt'))
+    if (
+      sessionStorage.getItem('acorntv_st_pmt')
+      && sessionStorage.getItem('acorntv_st_pmt').toLowerCase() === 'upgrade'
+    ) {
+      // debugger
+      this
+        .$('.upgrade-to-annual button')
+        .click()
+    }
   }
 }
 
