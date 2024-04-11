@@ -29,8 +29,8 @@
           </li>
           <li><a href="#accountStatus">{{t "MANAGE-ACCOUNT"}}</a></li>
           <li><a href="#editPassword">{{t "CHANGE-PASSWORD"}}</a></li>
-          {{#if Customer.webPaymentEdit}}
-            {{#if Customer.StripeEnabled}}
+          {{#if isWebPaymentEdit}}
+            {{#if isStripeEnabled}}
               <li>
                 <a href="#updatecard">
                   {{t "UPDATE-BILLING-INFORMATION"}}
@@ -38,10 +38,10 @@
               </li>
             {{/if}}
           {{/if}}
-          {{#if navigation.emailSection}}
+          {{#if isEmailSection}}
             <li><a href="#editEmail">{{t "CHANGE-EMAIL"}}</a></li>
           {{/if}}
-          {{#if Session.LoggedIn}}
+          {{#if isLoggedIn}}
             <li><a href="#logout">{{t "LOG-OUT"}}</a></li>
           {{else}}
             <li>
@@ -75,11 +75,11 @@
     <div class="navbar-collapse side-collapse in">
       <ul class="nav navbar-nav">
         {{#each navData}}
-        <li>
-          <a href="{{ headerNavURL }}">
-            {{ t i18nKey }}
-          </a>
-        </li>
+          <li>
+            <a href="{{headerNavURL}}">
+              {{t i18nKey}}
+            </a>
+          </li>
         {{/each}}
       </ul>
     </div>

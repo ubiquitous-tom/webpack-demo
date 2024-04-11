@@ -55,17 +55,17 @@ class Header extends View {
 
     const isLoggedIn = this.model.has('Session') ? this.model.get('Session').LoggedIn : false
     const isWebPaymentEdit = this.model.has('Customer') && this.model.get('Customer').webPaymentEdit
+    const isStripeEnabled = this.model.has('Customer') && this.model.get('Customer').StripeEnabled
     const isTigo = this.model.get('Membership').Store === 'Tigo'
 
     const attributes = {
       isLoggedIn,
       isWebPaymentEdit,
+      isStripeEnabled,
       signupEnv: this.model.get('signupEnv'),
       environment: this.model.get('environment'),
       atvlogo,
-      navigation: {
-        emailSection: isWebPaymentEdit || isTigo,
-      },
+      isEmailSection: isWebPaymentEdit || isTigo,
       navData: this.headerModel.has('navData') ? this.headerModel.get('navData') : null,
     }
     const html = this.template(attributes)
