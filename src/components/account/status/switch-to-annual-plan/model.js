@@ -19,28 +19,50 @@ class SwitchToAnnualPlanModel extends ATVModel {
   getMonthlyToAnnualUpgradeInfo() {
     console.log('SwitchToAnnualPlanModel getMonthlyToAnnualUpgrade')
     const countryCode = this.get('BillingAddress').StripeCountryCode || this.get('BillingAddress').Country
+    const currentStripePlanID = this.get('currentMembership').StripePlanID || false
     const type = 'upgrade'
     const fromFrequency = 'monthly'
     const toFrequency = 'annual'
     const plansAvailable = this.get('plansAvailable')
-    _.each(plansAvailable, (plan, key, collection) => {
-      // console.log(plan.type)
-      if (plan.type === type) {
-        // console.log(plan.from_frequency, plan.to_frequency)
-        if (
-          plan.from_frequency === fromFrequency
-          && plan.to_frequency === toFrequency
-          && plan.country_code === countryCode
-        ) {
-          console.log(plan)
-          this.set('currentUpgradePlan', plan)
-          console.log(this)
+    if (currentStripePlanID) {
+      _.each(plansAvailable, (plan, key, collection) => {
+        // console.log(plan.type)
+        if (plan.type === type) {
+          // console.log(plan.from_frequency, plan.to_frequency)
+          if (
+            plan.from_stripe_plan_id === currentStripePlanID
+            && plan.to_frequency === toFrequency
+            && plan.country_code === countryCode
+          ) {
+            console.log(plan)
+            this.set('currentUpgradePlan', plan)
+            console.log(this)
 
-          return plan
+            return plan
+          }
         }
-      }
-      return collection
-    })
+        return collection
+      })
+    } else {
+      _.each(plansAvailable, (plan, key, collection) => {
+        // console.log(plan.type)
+        if (plan.type === type) {
+          // console.log(plan.from_frequency, plan.to_frequency)
+          if (
+            plan.from_frequency === fromFrequency
+            && plan.to_frequency === toFrequency
+            && plan.country_code === countryCode
+          ) {
+            console.log(plan)
+            this.set('currentUpgradePlan', plan)
+            console.log(this)
+
+            return plan
+          }
+        }
+        return collection
+      })
+    }
   }
 
   confirmUpgrade() {
