@@ -32,7 +32,6 @@ class SwitchToAnnualPlanModel extends ATVModel {
           if (
             plan.from_stripe_plan_id === currentStripePlanID
             && plan.to_frequency === toFrequency
-            && plan.country_code === countryCode
           ) {
             console.log(plan)
             this.set('currentUpgradePlan', plan)
