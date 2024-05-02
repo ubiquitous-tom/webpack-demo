@@ -1,3 +1,3 @@
-import PromoCode from "./view";
+import PromoCode from './view'
 
 export default PromoCode

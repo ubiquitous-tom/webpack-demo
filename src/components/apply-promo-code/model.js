@@ -4,9 +4,10 @@ import _ from 'underscore'
 import StripePlans from 'core/models/stripe-plans'
 
 class ApplyPromoCodeModel extends Model {
-  // get url() {
-  //   return '/applypromo'
-  // }
+  get url() {
+    const env = this.environment()
+    return `https://${env}api.rlje.net/acorn/promo`
+  }
 
   initialize() {
     console.log('ApplyPromoCodeModel initialize')
@@ -57,41 +58,36 @@ class ApplyPromoCodeModel extends Model {
     return response
   }
 
-  // applyCode(code, sessionID) {
-  //   console.log('ApplyPromoCodeModel applyCode')
-  //   console.log(this)
-  //   const attributes = {
-  //     Session: {
-  //       SessionID: sessionID,
-  //     },
-  //     PromoCode: {
-  //       Code: code,
-  //     },
-  //   }
-  //   const options = {
-  //     dataType: 'json',
-  //     ajaxSync: true,
-  //     wait: true,
-  //     success: this.success,
-  //     error: this.error,
-  //   }
-  //   console.log(attributes, options)
-  //   this.save(attributes, options)
-  // }
+  applyCode(code, sessionID) {
+    console.log('ApplyPromoCodeModel applyCode')
+    console.log(this)
+    const attributes = {
+      Session: {
+        SessionID: sessionID,
+      },
+      PromoCode: {
+        Code: code,
+      },
+    }
+    const options = {
+      dataType: 'json',
+      ajaxSync: true,
+      wait: true,
+      success: this.success,
+      error: this.error,
+    }
+    console.log(attributes, options)
+    this.save(attributes, options)
+  }
 
   success(model, resp, options) {
     console.log('ApplyPromoCodeModel success')
     console.log(model, resp, options)
 
-    const { message } = resp // Your Promotion Code has been applied!
-    // If `TrialEnabled` is `false`, it is a gift code
-    // Or
-    // If `TrialEnabled` is `null` and the `MembershipTerm` is `12`
-    // and `MembershipTermType` is`MONTH`, it is a gift code
-    const promoMessagePrefix = 'Promo applied!'
-    const promoMessageSuffix = 'Your account has been updated'
+    const code = model.get('promoCode') || ''
+    const message = `Promo ${code} applied!`
     model.set({
-      applyPromoCodeSuccess: true,
+      applyPromoCodeResult: true,
       type: 'success',
       message,
     })
@@ -107,7 +103,7 @@ class ApplyPromoCodeModel extends Model {
           console.log(response.responseJSON)
           if (!_.isEmpty(response.responseJSON)) {
             model.set({
-              applyPromoCodeSuccess: false,
+              applyPromoCodeResult: false,
               type: 'error',
               message: response.responseJSON.message,
             })
@@ -117,12 +113,27 @@ class ApplyPromoCodeModel extends Model {
           console.log(error.responseJSON)
           if (!_.isEmpty(error.responseJSON)) {
             model.set({
-              applyPromoCodeSuccess: false,
+              applyPromoCodeResult: false,
               type: 'error',
               message: error.responseJSON.error,
             })
           }
         })
+  }
+
+  environment() {
+    let env = ''
+    if (window.location.hostname.indexOf('dev') > -1) {
+      env = 'dev3-'
+    }
+    if (window.location.hostname.indexOf('qa') > -1) {
+      env = 'qa-'
+    }
+    if (process.env.NODE_ENV === 'development') {
+      env = process.env.RLJE_API_ENVIRONMENT
+    }
+    // console.log(env)
+    return env
   }
 }
 

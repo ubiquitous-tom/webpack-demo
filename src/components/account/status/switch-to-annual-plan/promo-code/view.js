@@ -59,11 +59,18 @@ class PromoCode extends View {
     })
 
     /* eslint no-unused-vars: 0 */
-    this.listenTo(this.model, 'change:promoAppliedAmount', (model, value, options) => {
-      const subscriptionAmount = this.switchToAnnualPlan.model.get('annualStripePlan').SubscriptionAmount
-      const discountedPrice = subscriptionAmount - ((value * subscriptionAmount) / 100)
-      const promoAppliedAmount = (Math.floor(discountedPrice * 100) / 100).toFixed(2)
-      const pricing = this.switchToAnnualPlan.model.get('annualStripePlan').CurrSymbol + promoAppliedAmount
+    this.listenTo(this.model, 'change:promoAppliedAmount', (model, value) => {
+      const annualPlan = this.switchToAnnualPlan.model.get('annualStripePlan')
+      const subscriptionAmount = annualPlan.SubscriptionAmount
+      const promo = model.get('promo') || {}
+
+      const discountedPrice = promo.StripePercentOff
+        ? subscriptionAmount * (1 - value / 100)
+        : subscriptionAmount - (value || 0)
+      // const promoAppliedAmount = (Math.floor(discountedPrice * 100) / 100).toFixed(2)
+      const promoAppliedAmount = discountedPrice.toFixed(2)
+      const pricing = annualPlan.CurrSymbol + promoAppliedAmount
+
       this.$el.find('.annual-plan-message span').addClass('applied-success').html(pricing)
       this.$el.find('#billing-container .legal-notice span').html(pricing)
     })
@@ -75,10 +82,8 @@ class PromoCode extends View {
 
     this.model.on('error', (model, value, options) => {
       console.log('Promocode initialize on error')
-      // console.log(model, value, options)
-      // console.log(this.$el[0])
-      // console.log(this.$el.find('#promocode-field .form-group')[0])
-      debugger
+      this.loadingStop()
+      this.flashMessage.onFlashMessageShow(value.responseJSON.error, 'error')
       this.$el.find('#promocode-field .form-group').addClass('has-error')
     })
   }

@@ -2,10 +2,9 @@ import { Model, wrapError } from 'backbone'
 // import _ from 'underscore'
 
 class StripeToken extends Model {
-
   get defaults() {
     return {
-      amount: null
+      amount: null,
     }
   }
 
@@ -17,7 +16,7 @@ class StripeToken extends Model {
   }
 
   parse(resp) {
-    resp.card.number = '••••••••••••' + resp.card.last4
+    resp.card.number = `••••••••••••${resp.card.last4}`
 
     return resp
   }
@@ -25,25 +24,22 @@ class StripeToken extends Model {
   validate(attrs) {
     if (attrs.card) {
       if (
-        attrs.card.number &&
-        !attrs.card.last4 &&
-        !this.api.validateCardNumber(attrs.card.number)
+        attrs.card.number
+        && !attrs.card.last4
+        && !this.api.validateCardNumber(attrs.card.number)
       ) {
-        return "Invalid card number"
+        return 'Invalid card number'
       }
 
       if (
-        attrs.card.exp_month &&
-        attrs.card.exp_year &&
-        !this.api.validateExpiry(
-          attrs.card.exp_month.toString(), attrs.card.exp_year.toString()
-        )
+        attrs.card.exp_month
+        && attrs.card.exp_year
+        && !this.api.validateExpiry(attrs.card.exp_month.toString(), attrs.card.exp_year.toString())
       ) {
-        return "Invalid expiration."
+        return 'Invalid expiration.'
       }
 
-      if (attrs.card.cvc && !this.api.validateCVC(attrs.card.cvc.toString()))
-        return "Invalid CVC"
+      if (attrs.card.cvc && !this.api.validateCVC(attrs.card.cvc.toString())) return 'Invalid CVC'
     }
   }
 
@@ -60,7 +56,8 @@ class StripeToken extends Model {
     this.api.createToken(
       this.attributes.card,
       this.attributes.amount,
-      options.success)
+      options.success,
+    )
 
     return true
   }
@@ -75,14 +72,14 @@ class StripeToken extends Model {
   }
 
   wrapSuccess(onSuccess, options) {
-    var model = this
+    const model = this
 
     return function (status, resp) {
       if (status !== 200) {
         return options.error(model, resp)
       }
 
-      var serverAttrs = model.parse(resp)
+      const serverAttrs = model.parse(resp)
 
       if (!model.set(serverAttrs, options)) {
         return false

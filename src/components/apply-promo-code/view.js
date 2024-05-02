@@ -63,52 +63,16 @@ class ApplyPromoCode extends View {
       this.setPresetOptions()
     })
 
-    this.listenTo(this.model, 'invalid', (model, error, options) => {
-      console.log(model, error, options)
-      const message = this.i18n.t(error)
-      debugger
-      this.flashMessage.onFlashMessageShow(message, 'error')
-      this.loadingStop(model, error, options)
-    })
-
     /* eslint no-shadow: 0 */
-    // this.listenTo(this.model, 'change:applyPromoCodeSuccess', (model, value, options) => {
-    //   console.log(model, value, options)
-    //   let message
-    //   if (value) {
-    //     message = this.i18n.t('PROMOTION-APPLIED')
-    //   } else {
-    //     message = this.i18n.t('ERR-PROCESS-REQUEST')
-    //     if (model.get('message').indexOf('Your code is invalid') !== -1) {
-    //       message = this.i18n.t('CODE-INVALID')
-    //     }
-    //     if (model.get('message').indexOf('Promo code is expired') !== -1) {
-    //       message = this.i18n.t('REDEEM-GIFT-NOT-AVAILABLE')
-    //     }
-    //     if (model.get('message').indexOf('Promo code not found') !== -1) {
-    //       message = this.i18n.t('REDEEM-GIFT-NOT-AVAILABLE')
-    //     }
-    //   }
-    //   // debugger
-    //   this.flashMessage.onFlashMessageShow(message, model.get('type'))
-    //   this.loadingStop(model, value, options)
-    // })
-
-    this.listenTo(this.model, 'change:promoCodeSuccess', (model, value) => {
-      console.log(model, value)
-      // debugger
-      model.unset('promoCodeSuccess', { silent: true })
-      this.flashMessage.onFlashMessageShow(model.get('flashMessage').message, model.get('flashMessage').type)
+    this.listenTo(this.applyPromoCodeModel, 'change:applyPromoCodeResult', (model, value, options) => {
+      this.flashMessage.onFlashMessageShow(model.get('message'), model.get('type'))
       this.loadingStop(model, value, options)
-    })
 
-    // this.listenTo(this.model, 'error', (model, xhr, options) => {
-    //   console.log(model, xhr, options)
-    //   const message = this.i18n.t('ERROR')
-    //   debugger
-    //   this.flashMessage.onFlashMessageShow(message, 'error')
-    //   this.loadingStop(model, xhr, options)
-    // })
+      if (model.get('applyPromoCodeResult')) {
+        setTimeout(() => window.location.assign('/'), 2000)
+      }
+      model.unset('applyPromoCodeResult', { silent: true })
+    })
   }
 
   render() {
@@ -145,19 +109,19 @@ class ApplyPromoCode extends View {
   applyCode(e) {
     e.preventDefault()
     console.log('ApplyPromoCode applyCode')
-    // const code = e.target[0].value
+    const code = e.target[0].value
     this.loadingStart()
-    const subscription = (this.model.has('Subscription') && this.model.get('Subscription'))
-    const membershipType = (subscription.Monthly) ? 'monthly' : 'annual'
-    const data = {
-      Code: e.target[0].value,
-      Country: this.model.get('stripePlansCountry'),
-      CustomerID: (this.model.has('Customer') && this.model.get('Customer').CustomerID) || '',
-      PlanID: this.model.get(`${membershipType}StripePlan`).PlanID,
-    }
-    console.log(data)
+    // const subscription = (this.model.has('Subscription') && this.model.get('Subscription'))
+    // const membershipType = (subscription.Monthly) ? 'monthly' : 'annual'
+    // const data = {
+    //   Code: e.target[0].value,
+    //   Country: this.model.get('stripePlansCountry'),
+    //   CustomerID: (this.model.has('Customer') && this.model.get('Customer').CustomerID) || '',
+    //   PlanID: this.model.get(`${membershipType}StripePlan`).PlanID,
+    // }
     // debugger
-    this.model.submit(data)
+    this.applyPromoCodeModel.set({ promoCode: code })
+    this.applyPromoCodeModel.applyCode(code, this.sessionID)
     // this.model.applyCode(code, this.sessionID)
   }
 

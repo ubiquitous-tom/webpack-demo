@@ -10,7 +10,6 @@ _.templateSettings = {
 
 console.log(_.templateSettings)
 
-
 // original
 // _.templateSettings = {
 //   "escape": /<%=([\s\S]+?)%>/g,
