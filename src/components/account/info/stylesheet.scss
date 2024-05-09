@@ -28,13 +28,24 @@
       font-size: 1em;
     }
   }
+  .cancel-membership {
+    button {
+      text-transform: capitalize;
+      padding-left: 3.5em;
+      padding-right: 3.5em;
+      font-weight: 700;
+      margin-top: 0;
+    }
+  }
 }
-.cancel-membership a {
-  color: #3a8788;
-  font-family: "Oxygen", sans-serif;
-  font-weight: 700;
-  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-  text-transform: uppercase;
+.cancel-membership {
+  a {
+    color: #3a8788;
+    font-family: "Oxygen", sans-serif;
+    font-weight: 700;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+    text-transform: uppercase;
+  }
 }
 .contact-support {
   padding: 1rem 0;

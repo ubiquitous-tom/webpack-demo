@@ -16,7 +16,7 @@ class AccountInfo extends View {
 
   get events() {
     return {
-      'click .cancel-membership a': 'cancelMembership',
+      'click .cancel-membership button': 'cancelMembership',
     }
   }
 
