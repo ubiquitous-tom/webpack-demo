@@ -143,12 +143,9 @@ class SwitchToAnnualPlanModel extends ATVModel {
             return message
           }
           if (!_.isEmpty(error.responseText)) {
-            // TODO: Remove in phase 2. Update to use error message from Stripe API.
-            message = 'Sorry, we are unable to process your payment right now. Please contact support@acorn.tv for help.'
-            // message = error.statusText
-            return message
+            message = error.responseText
           }
-          return message
+          return this.getPromoMessageError(message)
         })
       .always(() => {
         options.context.set({
@@ -172,6 +169,24 @@ class SwitchToAnnualPlanModel extends ATVModel {
 
   loadingStop() {
     console.log('ApplyPromoCodeModel loadingStop')
+  }
+
+  hasText(msg, text) {
+    return JSON.stringify(msg).toLocaleLowerCase().indexOf(text.toLocaleLowerCase()) !== -1
+  }
+
+  getPromoMessageError(error) {
+    let message = error
+    if (this.hasText(message, 'Invalid Promo Code for customer country') || this.hasText(message, 'Invalid customer country')) {
+      message = 'Promo not valid in your country'
+    }
+    if (this.hasText(message, 'Invalid customer segment')) {
+      message = 'Promo is not valid for your subscription status'
+    }
+    if (this.hasText(message, 'Invalid plan term') || this.hasText(message, 'PlanTermRequirement')) {
+      message = 'Promo is not valid for selected plan'
+    }
+    return message
   }
 }
 

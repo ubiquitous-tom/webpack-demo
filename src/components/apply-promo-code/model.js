@@ -105,7 +105,7 @@ class ApplyPromoCodeModel extends Model {
             model.set({
               applyPromoCodeResult: false,
               type: 'error',
-              message: response.responseJSON.message,
+              message: model.getPromoMessageError(response.responseJSON.message),
             })
           }
         },
@@ -115,10 +115,43 @@ class ApplyPromoCodeModel extends Model {
             model.set({
               applyPromoCodeResult: false,
               type: 'error',
-              message: error.responseJSON.error,
+              message: model.getPromoMessageError(error.responseJSON.error),
             })
           }
         })
+  }
+
+  getPromoMessageError(error) {
+    let message = error
+    if (this.hasText(message, [
+      'Customer Country restriction',
+      'Invalid Promo Code for customer country',
+      'Invalid customer country',
+    ])) {
+      message = 'Promo not valid in your country'
+    }
+    if (this.hasText(message, [
+      'Customer Segment restriction',
+      'Invalid customer segment',
+    ])) {
+      message = 'Promo is not valid for your subscription status'
+    }
+    if (this.hasText(message, [
+      'Invalid plan term',
+      'PlanTermRequirement',
+    ])) {
+      message = 'Promo is not valid for current plan'
+    }
+    return message
+  }
+
+  hasText(content, substrings) {
+    if (typeof substrings === 'string') {
+      return content.includes(substrings)
+    } if (Array.isArray(substrings)) {
+      return substrings.some((substring) => content.includes(substring))
+    }
+    return false
   }
 
   environment() {

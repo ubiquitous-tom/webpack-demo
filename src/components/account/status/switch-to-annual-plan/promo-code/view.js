@@ -83,7 +83,6 @@ class PromoCode extends View {
     this.model.on('error', (model, value, options) => {
       console.log('Promocode initialize on error')
       this.loadingStop()
-      this.flashMessage.onFlashMessageShow(value.responseJSON.error, 'error')
       this.$el.find('#promocode-field .form-group').addClass('has-error')
     })
   }

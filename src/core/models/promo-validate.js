@@ -123,6 +123,10 @@ class PromoValidateModel extends Model {
       })
   }
 
+  hasText(msg, text) {
+    return JSON.stringify(msg).toLocaleLowerCase().indexOf(text.toLocaleLowerCase()) !== -1
+  }
+
   getPromoMessageError(error) {
     let message = error
     if (this.hasText(message, 'Invalid Promo Code for customer country') || this.hasText(message, 'Invalid customer country')) {

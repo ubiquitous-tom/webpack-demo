@@ -62,7 +62,7 @@ class MonthlyPlan extends View {
       tagline: this.getTagline(),
       // TODO: `isUpgradeAllowed` for initial launch. Remove in phase 2.
       isTigo: (this.model.get('Membership').Store === 'Tigo'),
-      isUpgradeAllowed: (this.model.get('Membership').Store !== 'Tigo'),
+      isUpgradeAllowed: (this.model.get('Membership').Store !== 'Tigo') && this.model.get('Customer').StripeEnabled,
     }
     const html = this.template(data)
     this.$el.html(html)

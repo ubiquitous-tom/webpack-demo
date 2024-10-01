@@ -3,8 +3,8 @@
   flex-flow: column nowrap;
   align-items: center;
   text-align: center;
-  background: linear-gradient(232.33deg, #0b2659 43.73%, #0b1733 87.54%);
-  border: 2px solid #0b2659;
+  background: linear-gradient(232.33deg, #053E3A 43.73%, #053E3A 87.54%);
+  border: 2px solid #053E3A;
   box-sizing: border-box;
   box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.15);
   color: #fff;
@@ -62,4 +62,10 @@
   font-size: 1.75rem;
   font-weight: 700;
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  background: #EEF0E9;
+  color: #000;
+
+  &:hover {
+    opacity: 0.9;
+  }
 }

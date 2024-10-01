@@ -73,7 +73,9 @@ class AnnualPlan extends View {
 
   getAnnualPlanMessage() {
     if (this.isGift()) {
-      return this.i18n.t('ANNUAL-PLAN-GIFT-ENDS-ON-DATE', { endDate: this.model.get('Membership').ExpirationDate })
+      return this.i18n.t('ANNUAL-PLAN-GIFT-ENDS-ON-DATE', {
+        endDate: this.model.get('Membership').ExpirationDate || this.model.get('Membership').NextBillingDate,
+      })
     }
     return this.i18n.t('ANNUAL-PLAN-RENEWS-ON-DATE-PRICE', {
       renewalDate: this.getRenewalDate(),
