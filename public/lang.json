@@ -1014,6 +1014,14 @@
                     "uk": "Sign In"
                 }
             },
+            "GIFT-MEMBERSHIP-2024": {
+                "type": "text",
+                "content": {
+                    "en": "Gift an Acorn TV Gift Membership",
+                    "es": "Regala una suscripci\u00f3n de Acorn TV",
+                    "uk": "Gift an Acorn TV Gift Membership"
+                }
+            },
             "YEAR-UNLIMITED-ACCESS": {
                 "type": "text",
                 "content": {
@@ -1556,6 +1564,14 @@
                     "en": "(Gift membership codes are good only for a one--time use on Acorn TV for the disclosed gift membership period and are subject to the Acorn TV Terms and Conditions and Privacy Policy) ",
                     "es": "Los c\u00f3digos de certificados de regalo son v\u00e1lidos para un uso \u00fanico en Acorn TV y por un per\u00edodo de tiempo determinado. Los c\u00f3digos est\u00e1n sujetos a los t\u00e9rminos y condiciones de la pol\u00edtica de privacidad de Acorn TV.",
                     "uk": "(Gift membership codes are good only for a one--time use on Acorn TV for the disclosed gift membership period and are subject to the Acorn TV Terms and Conditions and Privacy Policy) "
+                }
+            },
+            "ANNUAL-ACORNTV-GIFT-RECIPIENT": {
+                "type": "text",
+                "content": {
+                    "en": "Recipient will be asked to provide an email address for membership confirmation.",
+                    "es": "A la persona que le regalaste la suscripci\u00f3n solo se le solicitar\u00e1un correo electr\u00f3nico.",
+                    "uk": "Recipient will be asked to provide an email address for membership confirmation."
                 }
             },
             "ANNUAL-MEMBERSHIP-RENEWAL": {
@@ -2452,6 +2468,14 @@
                     "en": "Stream World-Class TV from Britain and Beyond Always available, always commercial free. Just ${var1} a month.",
                     "es": "Disfruta de streaming de clase mundial desde Gran Breta\u00f1a y m\u00e1s all\u00e1, siempre disponible y sin anuncios. Solo por ${var1} al mes.",
                     "uk": "Stream World-Class TV from Britain and Beyond Always available, always advert free. Just ${var1} a month."
+                }
+            },
+            "STREAM-WORLDCLASS-TV-STORE-HANDLEBARS": {
+                "type": "text",
+                "content": {
+                    "en": "Stream World-Class TV from Britain and Beyond Always available, always commercial free. Just %{monthlyPrice} a month.",
+                    "es": "Disfruta de streaming de clase mundial desde Gran Breta\u00f1a y m\u00e1s all\u00e1, siempre disponible y sin anuncios. Solo por ${monthlyPrice} al mes.",
+                    "uk": "Stream World-Class TV from Britain and Beyond Always available, always advert free. Just %{monthlyPrice} a month."
                 }
             },
             "THIRTY": {
@@ -3374,6 +3398,14 @@
                     "uk": "Promotion applied!"
                 }
             },
+            "PROMO-APPLIED": {
+                "type": "text",
+                "content": {
+                    "en": "Promo applied",
+                    "es": "\u00a1Promoci\u00f3n aplicada",
+                    "uk": "Promo applied"
+                }
+            },
             "PASSWORD-CHANGED": {
                 "type": "text",
                 "content": {
@@ -3758,6 +3790,14 @@
                     "uk": "We're sorry but the Costco Promo Code you entered invalid. Please check what you typed."
                 }
             },
+            "EXPIRED-PROMO-CODE-2024": {
+                "type": "text",
+                "content": {
+                    "en": "This promo code has expired.",
+                    "es": "Translation Needed",
+                    "uk": "This promo code has expired."
+                }
+            },
             "CHCK-HIGH-FIELDS": {
                 "type": "text",
                 "content": {
@@ -3942,12 +3982,28 @@
                     "uk": "The code you have entered is currently not available, please contact our <a href=\"mailto:support@acorn.tv\">customer service<\/a> department for assistance."
                 }
             },
+            "PROMOCODE-ERROR": {
+                "type": "text",
+                "content": {
+                    "en": "There was an error with the promo code. Please try again or contact Customer Service.",
+                    "es": "Translation Needed",
+                    "uk": "There was an error with the promo code. Please try again or contact Customer Service."
+                }
+            },
             "MONTHLY-PRICE-STORE": {
                 "type": "text",
                 "content": {
                     "en": "Watch free for 7 days. Just ${var1}\/month, plus taxes where applicable after that. No commitment: cancel within 7 days to avoid payment.",
                     "es": "Ve gratis durante 7 d\u00edas. Solo por ${var1}\/mes, m\u00e1s impuestos donde apliquen. Sin compromiso: puedes cancelar dentro de los pr\u00f3ximos 7 d\u00edas para evitar cargos.",
                     "uk": "Watch free for 14 days. Just ${var1}\/month, plus taxes where applicable after that. No commitment: cancel within 14 days to avoid payment."
+                }
+            },
+            "MONTHLY-PRICE-STORE-HANDLEBARS": {
+                "type": "text",
+                "content": {
+                    "en": "Watch free for 7 days. Just %{monthlyPrice}\/month, plus taxes where applicable after that. No commitment: cancel within 7 days to avoid payment.",
+                    "es": "Ve gratis durante 7 d\u00edas. Solo por %{monthlyPrice}\/mes, m\u00e1s impuestos donde apliquen. Sin compromiso: puedes cancelar dentro de los pr\u00f3ximos 7 d\u00edas para evitar cargos.",
+                    "uk": "Watch free for 7 days. Just %{monthlyPrice}\/month, plus taxes where applicable after that. No commitment: cancel within 7 days to avoid payment."
                 }
             },
             "FREE-SEVEN-DAYS-DEVICE": {
@@ -4150,6 +4206,14 @@
                     "uk": "plus %{var1} (Estimated taxes)"
                 }
             },
+            "TAX-ESTIMATED-TAXES-HANDLEBARS": {
+                "type": "text",
+                "content": {
+                    "en": "plus %{estimatedTax} (Estimated taxes)",
+                    "es": "Mas %{estimatedTax} (Estimated taxes)",
+                    "uk": "plus %{estimatedTax} (Estimated taxes)"
+                }
+            },
             "TAX-SALES-TAX": {
                 "type": "text",
                 "content": {
@@ -4214,6 +4278,14 @@
                     "uk": "1 Gift: ${var1} (regular price)"
                 }
             },
+            "BLACK-FRIDAY-PROMO-LIST-1-2024": {
+                "type": "text",
+                "content": {
+                    "en": "2 Gift: %{giftPrice} (regular price)",
+                    "es": "2 regalo: %{giftPrice} (precio regular)",
+                    "uk": "2 Gift: %{giftPrice} (regular price)"
+                }
+            },
             "BLACK-FRIDAY-PROMO-LIST-2-2019": {
                 "type": "text",
                 "content": {
@@ -4222,12 +4294,28 @@
                     "uk": "2nd Gift: ${var1} (50% off)"
                 }
             },
+            "BLACK-FRIDAY-PROMO-LIST-2-2024": {
+                "type": "text",
+                "content": {
+                    "en": "2nd Gift: %{var1} (%{percentOff}% off)",
+                    "es": "2\u00ba regalo: %{giftPrice} (%{percentOff}% de descuento)",
+                    "uk": "2nd Gift: %{giftPrice} (%{percentOff}% off)"
+                }
+            },
             "BLACK-FRIDAY-PROMO-LIST-3-2019": {
                 "type": "text",
                 "content": {
                     "en": "3rd Gift: ${var1} (50% off)",
                     "es": "3\u00ba regalo: ${var1} (50% de descuento)",
                     "uk": "3rd Gift: ${var1} (50% off)"
+                }
+            },
+            "BLACK-FRIDAY-PROMO-LIST-3-2024": {
+                "type": "text",
+                "content": {
+                    "en": "3rd Gift: %{var1} (%{percentOff}% off)",
+                    "es": "3\u00ba regalo: %{giftPrice} (%{percentOff}% de descuento)",
+                    "uk": "3rd Gift: %{giftPrice} (%{percentOff}% off)"
                 }
             },
             "BLACK-FRIDAY-PROMO-CHECKOUT-2019": {
@@ -4252,6 +4340,22 @@
                     "en": "Have a Promo Code? Click the 'Apply Code' button to enter you code.",
                     "es": "\u00bfTienes un c\u00f3digo promocional? Da clic en 'Aplica c\u00f3digo'",
                     "uk": "Have a Promo Code? Click the 'Apply Code' button to enter you code."
+                }
+            },
+            "APPLY-CODE-HERE-2024": {
+                "type": "text",
+                "content": {
+                    "en": "Have a Promo Code? Enter your code here.",
+                    "es": "\u00bfTienes un c\u00f3digo promocional? Da clic en 'Aplica c\u00f3digo'",
+                    "uk": "Have a Promo Code? Enter your code here."
+                }
+            },
+            "APPLY-GIFT-CODE-HERE": {
+                "type": "text",
+                "content": {
+                    "en": "Have a Gift Code? Click the 'Apply Code' button to enter your code.",
+                    "es": "\u00bfTienes un c\u00f3digo regalo? Da clic en 'Aplica c\u00f3digo'",
+                    "uk": "Have a Gift Code? Click the 'Apply Code' button to enter your code."
                 }
             },
             "VISA-REQUIREMENT": {
@@ -4958,6 +5062,14 @@
                     "uk": "Promo Code"
                 }
             },
+            "GIFT-CODE": {
+                "type": "text",
+                "content": {
+                    "en": "Gift Code",
+                    "es": "C\u00f3digo regalo",
+                    "uk": "Gift Code"
+                }
+            },
             "CONFIRM-UPGRADE": {
                 "type": "text",
                 "content": {
@@ -5452,6 +5564,14 @@
                     "en": "Your annual plan gift ends on %{endDate}.",
                     "es": "Tu plan anual de regalo finaliza el %{endDate}.",
                     "uk": "Your annual plan gift ends on %{endDate}."
+                }
+            },
+            "DISCOVER-EXTRAORDINARY-MYSTERIES": {
+                "type": "text",
+                "content": {
+                    "en": "Discover extraordinary mysteries, dramas, and thrillers from around the world. When ho-hum TV isn't cutting it, stream something brilliant.",
+                    "es": "Discover extraordinary mysteries, dramas, and thrillers from around the world. When ho-hum TV isn't cutting it, stream something brilliant.",
+                    "uk": "Discover extraordinary mysteries, dramas, and thrillers from around the world. When ho-hum TV isn't cutting it, stream something brilliant."
                 }
             },
             "PROMOCODE-INVALID-COUNTRY": {
