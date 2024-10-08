@@ -62,16 +62,7 @@ class AccountInfo extends View {
   }
 
   environment() {
-    let env = ''
-    if (window.location.hostname.indexOf('dev') > -1) {
-      env = 'dev.'
-    }
-    if (window.location.hostname.indexOf('qa') > -1) {
-      env = 'qa.'
-    }
-    if (process.env.NODE_ENV === 'development') {
-      env = process.env.ENVIRONMENT
-    }
+    const env = process.env.ENVIRONMENT || ''
     // console.log(env)
     return env
   }

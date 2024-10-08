@@ -155,16 +155,7 @@ class ApplyPromoCodeModel extends Model {
   }
 
   environment() {
-    let env = ''
-    if (window.location.hostname.indexOf('dev') > -1) {
-      env = 'dev-'
-    }
-    if (window.location.hostname.indexOf('qa') > -1) {
-      env = 'qa-'
-    }
-    if (process.env.NODE_ENV === 'development') {
-      env = process.env.RLJE_API_ENVIRONMENT
-    }
+    const env = process.env.RLJE_API_ENVIRONMENT || ''
     // console.log(env)
     return env
   }
