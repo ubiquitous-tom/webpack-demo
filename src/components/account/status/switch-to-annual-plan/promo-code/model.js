@@ -117,7 +117,7 @@ class PromoCodeModel extends ATVModel {
   }
 
   environment() {
-    const env = process.env.ENVIRONMENT || ''
+    const env = process.env.RLJE_API_ENVIRONMENT || ''
     // console.log(env)
     return env
   }
