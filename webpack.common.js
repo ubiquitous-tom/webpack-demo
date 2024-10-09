@@ -38,6 +38,7 @@ module.exports = {
       // path: './.env',
       safe: true,
       systemvars: true,
+      allowEmptyValues: true,
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
