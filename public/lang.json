@@ -83,7 +83,7 @@
                 "content": {
                     "en": "recently watched",
                     "es": "Visto recientemente",
-                    "uk": "(Spanish)"
+                    "uk": "recently watched"
                 }
             },
             "MY-WATCHLIST": {
@@ -2569,9 +2569,9 @@
             "PASSWORD-LENGTH": {
                 "type": "text",
                 "content": {
-                    "en": "Hint: The password should be at least 8-15 characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! \" ? $ % ^ & ).",
+                    "en": "Hint: The password must be between 8-15 characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! \" ? $ % ^ & ).",
                     "es": "Sugerencia: La contrase\u00f1a debe tener entre 8 y 15 caracteres. Para hacerla m\u00e1s segura, usa may\u00fasculas y min\u00fasculas, n\u00fameros y s\u00edmbolos como ! \" ? $ % ^ & ).",
-                    "uk": "Hint: The password should be at least eight characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! \" ? $ % ^ & )."
+                    "uk": "Hint: The password must be between 8-15 characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! \" ? $ % ^ & )."
                 }
             },
             "ENTER-NEW-PASSWORD": {
@@ -5330,7 +5330,7 @@
                 "type": "text",
                 "content": {
                     "en": "Testing Language",
-                    "es": "(Spanish)",
+                    "es": "Test Language",
                     "uk": "Test Language"
                 }
             },
