@@ -8,6 +8,7 @@ import EditEmail from 'components/edit-email'
 import EditPassword from 'components/edit-password'
 import ApplyPromoCode from 'components/apply-promo-code'
 import UpdateCard from 'components/updatecard/view'
+import MParticle from 'shared/elements/mparticle'
 
 class Workspace extends Router {
   get routes() {
@@ -34,6 +35,7 @@ class Workspace extends Router {
     this.history = new History()
     this.context = new BackBoneContext()
     this.ga = this.context.getContext('ga')
+    this.mParticle = new MParticle({ model: this.model })
     // Backbone.history.trigger('route', router, name, args);
   }
 
@@ -41,6 +43,7 @@ class Workspace extends Router {
     console.log('Router execute', callback, args, name)
     this.setActiveSidebar()
     this.ga.logPageView(name)
+    this.mParticle.logPageView()
 
     if (callback) {
       callback.apply(this, args)
