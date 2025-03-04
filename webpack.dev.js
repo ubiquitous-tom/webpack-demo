@@ -1,6 +1,7 @@
 const { merge } = require('webpack-merge')
 const express = require('express')
 const cookieParser = require('cookie-parser')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const common = require('./webpack.common')
 const atvRoutes = require('./server/routes')
 
@@ -25,6 +26,13 @@ module.exports = merge(common, {
       devServer.app.use('/', atvRoutes)
     },
   },
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'public/robots.txt', to: 'robots.txt' },
+      ],
+    }),
+  ],
   module: {
     rules: [
       {
