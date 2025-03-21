@@ -12,7 +12,8 @@ import InitializeApp from 'core/models/initializedapp'
 import Workspace from 'routers/router'
 import ATVModel from 'core/model'
 import I18n from 'core/i18n'
-import GoogleAnalyticsContext from 'core/contexts/google-analytics-context'
+// import GoogleAnalyticsContext from 'core/contexts/google-analytics-context'
+import AnalyticsContext from 'core/contexts/analytics-context'
 import LocaleContext from 'core/contexts/locale-context'
 
 import Header from 'shared/header'
@@ -37,7 +38,8 @@ $(() => {
     initializeApp.on('sync', (model) => {
       // console.log(model)
       // console.log(model.attributes)
-      new GoogleAnalyticsContext({ model })
+      // new GoogleAnalyticsContext({ model })
+      new AnalyticsContext({ model })
       new ATVModel()
       new ATVView({ model, i18n })
       new Workspace({ model, i18n })

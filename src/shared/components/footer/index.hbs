@@ -6,21 +6,21 @@
   <ul>
     {{#each navData}}
     <li>
-      <a
-      href="{{ footerNavURL }}"
+      <a href="{{ footerNavURL }}"
+
         {{#if displayClasses}}
-        class="{{ displayClasses }}"
+          class="{{ displayClasses }}"
         {{/if}}
 
         {{#if isPopUp}}
-        data-fancybox
-        data-type="iframe"
-        data-preload="false"
+          data-fancybox
+          data-type="iframe"
+          data-preload="false"
         {{else}}
-        {{#if target}}
-        target="{{ target }}"
-        {{/if}}
-        rel="noopener noreferrer"
+          {{#if target}}
+            target="{{ target }}"
+          {{/if}}
+          rel="noopener noreferrer"
         {{/if}}
       >
         {{t i18nKey}}

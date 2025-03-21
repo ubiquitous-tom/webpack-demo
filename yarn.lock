@@ -974,6 +974,11 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.5.tgz#4fc56c15c580b9adb7dc3c333a134e540b44bfb1"
   integrity sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==
 
+"@mparticle/web-mixpanel-kit@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@mparticle/web-mixpanel-kit/-/web-mixpanel-kit-2.1.2.tgz#7b6630bf7d337d3f2e7babb710da8aa11fd4cf1e"
+  integrity sha512-xS7g7+LjPbvZ1wbKr6NPCL+0vuAIfSXWZhJKwHPgp6S5T88/LCPEq2JkgvV5IhXzdLSDj61HVkY4aGW5Hweu5Q==
+
 "@mparticle/web-sdk@^2.31.1":
   version "2.31.1"
   resolved "https://registry.yarnpkg.com/@mparticle/web-sdk/-/web-sdk-2.31.1.tgz#fff4bd3f504e5e5e618fd4a7e0f6bf0451414472"

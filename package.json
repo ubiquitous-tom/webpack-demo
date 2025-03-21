@@ -74,6 +74,7 @@
   "dependencies": {
     "@fancyapps/ui": "^4.0.12",
     "@mparticle/web-sdk": "^2.31.1",
+    "@mparticle/web-mixpanel-kit": "^2.1.2",
     "@popperjs/core": "^2.10.2",
     "@stripe/stripe-js": "^1.21.0",
     "backbone": "^1.4.0",
