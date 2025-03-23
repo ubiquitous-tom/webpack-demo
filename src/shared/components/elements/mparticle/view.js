@@ -8,21 +8,20 @@ class MParticle extends View {
       console.log('MParticle initialize')
       this.model = options.model
       this.mParticleModel = new MParticleModel({ model: this.model })
-
-      this.initializeData()
+      this.render()
     }
   }
 
   render() {
     console.log('MParticle render')
 
+    this.initializeData()
+
     return this
   }
 
   initializeData() {
     this.requiredAttribures = {
-      // page: window.location.toString(),
-      // page_title: document.title,
       ga_uid: docCookies.getItem('ATVSessionCookie') || '',
       auth_state: this.model.get('Session')?.LoggedIn ? 'ob-sub-acorn' : 'unauth',
       // page_type: 'home', // this will be coming from `current_page_data`
@@ -32,24 +31,6 @@ class MParticle extends View {
       platform: 'web',
       service: 'acorn',
       network: 'acorn',
-    }
-
-    const { search } = document.location
-    const urlParams = new URLSearchParams(search)
-    if (urlParams.get('utm_campaign')) {
-      this.requiredAttribures.utm_campaign = urlParams.get('utm_campaign')
-    }
-    if (urlParams.get('utm_source')) {
-      this.requiredAttribures.utm_source = urlParams.get('utm_source')
-    }
-    if (urlParams.get('utm_medium')) {
-      this.requiredAttribures.utm_medium = urlParams.get('utm_medium')
-    }
-    if (urlParams.get('utm_term')) {
-      this.requiredAttribures.utm_term = urlParams.get('utm_term')
-    }
-    if (urlParams.get('utm_content')) {
-      this.requiredAttribures.utm_content = urlParams.get('utm_content')
     }
   }
 
@@ -115,11 +96,18 @@ class MParticle extends View {
     }
   }
 
-  login(isLoggedIn) {
+  login(isLoggedIn, data) {
     if (this.isMParticleLoaded()) {
       if (isLoggedIn) {
-        const identityRequest = this.mParticleModel.get('userIdentities')
-        mParticle.Identity.login(identityRequest)
+        console.log(this.model)
+        debugger
+        const identityRequest = {
+          userIdentities: {
+            email: data.email,
+            customerid: data.customerID,
+          },
+        }
+        mParticle.Identity.login(identityRequest, this.mParticleModel.identityCallback)
       } else {
         mParticle.logError('Login failed')
       }
@@ -129,39 +117,10 @@ class MParticle extends View {
   logout(isLoggedOut) {
     if (this.isMParticleLoaded()) {
       if (isLoggedOut) {
-        mParticle.Identity.logout({}, this.identityCallback)
+        mParticle.Identity.logout({}, this.mParticleModel.identityCallback)
       } else {
         mParticle.logError('Logout failed')
       }
-    }
-  }
-
-  identityCallback(result) {
-    if (result.getUser()) {
-      // IDSync request succeeded, mutate attributes or query for the MPID as needed
-      const user = result.getUser()
-      console.log(user)
-      return
-    }
-    debugger
-    const codes = window.mParticle.Identity.HTTPCodes
-    switch (result.httpCode) {
-      case codes.noHttpCoverage:
-        // retry the IDSync request
-        break
-      case codes.activeIdentityRequest:
-      case 429:
-        // inspect your implementation if this occurs frequency
-        // otherwise retry the IDSync request
-        break
-      case codes.validationIssue:
-      case 400:
-        console.log(result.body)
-        // inspect result.body to determine why the request failed
-        // this typically means an implementation issue
-        break
-      default:
-        console.log(result.body)
     }
   }
 

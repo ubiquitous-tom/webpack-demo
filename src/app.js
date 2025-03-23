@@ -33,7 +33,7 @@ $(() => {
     // context.setContext(localeModel)
     new LocaleContext({ model: localeModel })
     // console.log(localeModel, localeModel.attributes.tr)
-    const i18n = new I18n(localeModel.attributes.tr)
+    const i18n = new I18n(localeModel.get('tr'))
     const initializeApp = new InitializeApp()
     initializeApp.on('sync', (model) => {
       // console.log(model)

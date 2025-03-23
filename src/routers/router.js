@@ -1,6 +1,7 @@
 import { History, Router } from 'backbone'
 import _ from 'underscore'
 import BackBoneContext from 'core/contexts/backbone-context'
+
 import Logout from 'shared/elements/logout'
 
 import AccountHome from 'components/account'
