@@ -15,12 +15,26 @@ class MParticle extends View {
   render() {
     console.log('MParticle render')
 
-    this.initializeData()
+    /* eslint-disable no-undef */
+    const currentUser = mParticle.Identity.getCurrentUser()
+    console.log(currentUser)
+    // The user is already logged in since we are here but not in mParticle then do it here.
+    if (!currentUser) {
+      this.login(
+        this.model.get('Session')?.LoggedIn,
+        {
+          email: this.mParticleModel.email,
+          customerID: this.mParticleModel.customerID,
+        },
+      )
+    }
+
+    this.initializeConfig()
 
     return this
   }
 
-  initializeData() {
+  initializeConfig() {
     this.requiredAttribures = {
       ga_uid: docCookies.getItem('ATVSessionCookie') || '',
       auth_state: this.model.get('Session')?.LoggedIn ? 'ob-sub-acorn' : 'unauth',
