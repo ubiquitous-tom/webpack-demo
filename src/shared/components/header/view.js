@@ -78,7 +78,7 @@ class Header extends View {
 
     // this.$el.html(this.template(this.model.attributes))
 
-    this.$el.find('ul li a').on('click', (e) => this.logClickEvent(e))
+    this.$el.find('ul li a').on('click', (e) => this.logEvent(e))
 
     this.activateNavigation()
 
@@ -101,10 +101,49 @@ class Header extends View {
     // this.$('ul.nav').append(html)
   }
 
+  logEvent(e) {
+    console.log('Header logEvent', e)
+    debugger
+    this.logClickEvent(e)
+    if ($(e.currentTarget).attr('class').includes('navbar-right')) {
+      const currentClass = $(e.target).attr('class')
+      const currentClassLabel = $(e.target).text().trim()
+      let customEventName = ''
+      switch (currentClass) {
+        case 'log-in':
+          customEventName = 'sign_in_page_cta'
+          break
+        case 'free-month':
+          customEventName = 'create_account_cta'
+          break
+        default:
+          customEventName = ''
+      }
+      console.log(currentClass, currentClassLabel, customEventName)
+      if (customEventName) {
+        this.logCustomClickEvent(
+          e,
+          customEventName,
+          {
+            catagory: 'guest_nav',
+            component: 'header',
+            label: currentClassLabel,
+          },
+        )
+      }
+    }
+  }
+
   logClickEvent(e) {
     console.log('Header logClickEvent', e)
     debugger
     this.mp.logClickEvent(e)
+  }
+
+  logCustomClickEvent(e, customEventName, additionalData) {
+    console.log('Header logCustomClickEvent', e, customEventName, additionalData)
+    debugger
+    this.mp.logClickEvent(e, customEventName, additionalData)
   }
 
   navigate(e) {

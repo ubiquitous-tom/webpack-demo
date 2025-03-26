@@ -30,8 +30,8 @@ class MParticleModel extends Model {
     console.log('MParticleModel initialize')
     console.log(this.get('model'))
     this.model = this.get('model')
-    this.customerID = this.model.get('Customer').CustomerID || ''
-    this.email = this.model.get('Customer').Email || ''
+    this.customerID = this.model.get('Customer')?.CustomerID || ''
+    this.email = this.model.get('Customer')?.Email || ''
     this.config = {
       dataPlan: {
         planId: 'acorn_web',

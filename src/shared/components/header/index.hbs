@@ -42,7 +42,7 @@
             <li><a href="#editEmail">{{t "CHANGE-EMAIL"}}</a></li>
           {{/if}}
           {{#if isLoggedIn}}
-            <li><a href="#logout">{{t "LOG-OUT"}}</a></li>
+            <li><a class="log-out" href="#logout">{{t "LOG-OUT"}}</a></li>
           {{else}}
             <li>
               <a href="{{signinEnv}}/signin.jsp?OperationalScenario=STORE">
