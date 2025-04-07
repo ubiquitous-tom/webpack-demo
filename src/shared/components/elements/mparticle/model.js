@@ -37,6 +37,7 @@ class MParticleModel extends Model {
         planId: 'acorn_web',
         planVersion: 1,
       },
+      appVersion: '0.1',
     }
 
     if (process.env.MP_KEY) {
@@ -79,9 +80,9 @@ class MParticleModel extends Model {
       const user = result.getUser()
       user.setUserAttributes({
         ga_uid: docCookies.getItem('ATVSessionCookie') || '',
+        last_url: this.getLastURL(),
         platform: 'web',
         service: 'acorn',
-        network: 'acorn',
         on_acorn: 1,
       })
 
@@ -106,6 +107,10 @@ class MParticleModel extends Model {
       return
     }
 
+    this.callbackErrorCode(result)
+  }
+
+  callbackErrorCode(result) {
     const codes = window.mParticle.Identity.HTTPCodes
     switch (result.httpCode) {
       case codes.noHttpCoverage:
@@ -125,6 +130,14 @@ class MParticleModel extends Model {
       default:
         console.log(result.body)
     }
+  }
+
+  getLastURL() {
+    const referringUrlWithHash = sessionStorage.getItem('ATVSessionLastURL') || ''
+    console.log('MParticleModel getLastURL', referringUrlWithHash)
+    // Optional: Remove the stored URL after use
+    // sessionStorage.removeItem('ATVSessionLastURL')
+    return referringUrlWithHash
   }
 }
 

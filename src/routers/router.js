@@ -45,22 +45,8 @@ class Workspace extends Router {
     this.ga.logPageView(name)
     this.mp.logPageView(name)
 
-    // Once the `/initializeApp` API is fully logged in then log into mParticle.
-    if (this.model.get('Session') && this.model.get('Session')?.LoggedIn) {
-      const userData = {
-        email: this.model.get('Customer')?.Email || '',
-        customerID: this.model.get('Customer')?.CustomerID || '',
-      }
-      if (!this.mp.isMParticleLoggedIn()) {
-        debugger
-        this.mp.login(this.model.get('Session').LoggedIn, userData)
-      }
-    } else {
-      console.log('logged out')
-      debugger
-      const signinURL = `${this.model.get('signinEnv')}/signin.jsp?OperationalScenario=STORE`
-      window.location.assign(signinURL)
-    }
+    sessionStorage.setItem('ATVSessionLastURL', window.location.href)
+    this.model.trigger('router:executeRoute', this.model)
 
     if (callback) {
       callback.apply(this, args)
