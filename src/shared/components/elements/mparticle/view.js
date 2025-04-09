@@ -8,6 +8,7 @@ class MParticle extends View {
       console.log('MParticle initialize')
       this.model = options.model
       this.mParticleModel = new MParticleModel({ model: this.model })
+      this.requiredAttributes = {}
       this.render()
 
       this.listenTo(this.model, 'router:executeRoute', (model) => {
@@ -20,12 +21,12 @@ class MParticle extends View {
             customerID: model.get('Customer')?.CustomerID || '',
           }
           if (!this.isMParticleLoggedIn()) {
-            debugger
+            // debugger
             this.login(model.get('Session').LoggedIn, userData)
           }
         } else {
           console.log('logged out')
-          debugger
+          // debugger
           const signinURL = `${this.model.get('signinEnv')}/signin.jsp?OperationalScenario=STORE`
           window.location.assign(signinURL)
         }
@@ -35,18 +36,16 @@ class MParticle extends View {
 
   render() {
     console.log('MParticle render')
-
     this.initializeConfig()
 
     return this
   }
 
   initializeConfig() {
-    this.requiredAttribures = {
+    this.requiredAttributes = {
       ga_uid: docCookies.getItem('ATVSessionCookie') || '',
-      auth_state: this.model.get('Session')?.LoggedIn ? 'ob-sub-acorn' : 'unauth',
+      auth_state: this.getAuthStatus(),
       // page_type: 'home', // this will be coming from `current_page_data`
-      // last_url: document.referrer,
       full_url: document.location.href,
       url: document.location.pathname,
       platform: 'web',
@@ -54,9 +53,22 @@ class MParticle extends View {
       network: 'acorn',
     }
 
-    if (this.model.get('Session')?.LoggedIn) {
+    if (this.model.has('Session') && this.model.get('Session')?.LoggedIn === true) {
       this.setLastURL()
     }
+  }
+
+  getAuthStatus() {
+    let authStatus = 'unauth' // unauthenticated
+    if (this.model.has('Session') && this.model.get('Session')?.LoggedIn === true) {
+      if (this.model.has('Subscription') && this.model.get('Subscription')?.NoSubscription === true) {
+        authStatus = 'amcn-auth' // authenticated, no subscription
+      } else {
+        authStatus = 'ob-sub-acorn' // authenticated, subscription
+      }
+    }
+
+    return authStatus
   }
 
   setLastURL() {
@@ -64,23 +76,24 @@ class MParticle extends View {
     const currentUser = mParticle.Identity.getCurrentUser()
     console.log(currentUser)
     if (currentUser) {
-      currentUser.setUserAttribute('last_url', this.mParticleModel.getLastURL())
+      currentUser.setUserAttribute('last_url', this.getLastURL())
     }
+  }
+
+  getLastURL() {
+    const referringUrlWithHash = sessionStorage.getItem('ATVSessionLastURL') || ''
+    console.log('MParticle getLastURL', referringUrlWithHash)
+    // Optional: Remove the stored URL after use
+    // sessionStorage.removeItem('ATVSessionLastURL')
+    return referringUrlWithHash
   }
 
   logPageView(pageName) {
     if (this.isMParticleLoaded()) {
-      // const data = {
-      //   page: window.location.toString(),
-      //   page_title: document.title,
-      //   referring_page: document.referrer,
-      //   platform: process.env.MP_PLATFORM,
-      //   network: process.env.MP_NETWORK,
-      // }
-      this.requiredAttribures.page_type = pageName
-      console.log('MParticle logPageView', this.requiredAttribures)
+      this.requiredAttributes.page_type = pageName
+      console.log('MParticle logPageView', this.requiredAttributes)
       /* eslint-disable no-undef */
-      mParticle.logPageView('page_view', this.requiredAttribures)
+      mParticle.logPageView('page_view', this.requiredAttributes)
     }
   }
 
@@ -125,11 +138,11 @@ class MParticle extends View {
         item_name: attrItemName,
         element_name: (attrCat === 'button') ? 'button' : '',
       }
-      const attributes = { ...this.requiredAttribures, ...data }
+      const attributes = { ...this.requiredAttributes, ...data }
       mParticle.logEvent('click_event', mParticle.EventType.Other, attributes)
 
       if (customEvent) {
-        const customEventAttributes = { ...this.requiredAttribures, ...additionalData }
+        const customEventAttributes = { ...this.requiredAttributes, ...additionalData }
         mParticle.logEvent(customEvent, mParticle.EventType.Other, customEventAttributes)
       }
     }
@@ -138,15 +151,15 @@ class MParticle extends View {
   login(isLoggedIn, data) {
     if (this.isMParticleLoaded()) {
       if (isLoggedIn) {
-        console.log(this.model)
-        debugger
+        console.log(this.model, this.requiredAttributes)
+        // debugger
         const identityRequest = {
           userIdentities: {
             email: data.email,
             customerid: data.customerID,
           },
         }
-        mParticle.Identity.login(identityRequest, this.mParticleModel.identityCallbackLogin)
+        mParticle.Identity.login(identityRequest, this.identityCallbackLogin.bind(this))
       } else {
         mParticle.logError('Login failed')
       }
@@ -156,7 +169,7 @@ class MParticle extends View {
   identityCallbackLogin(result) {
     if (result.getUser()) {
       const user = result.getUser()
-      mParticle.logEvent('account_sign_in', mParticle.EventType.Other, this.requiredAttribures)
+      mParticle.logEvent('account_sign_in', mParticle.EventType.Other, this.requiredAttributes)
       this.mParticleModel.identityCallback(result)
       console.log(user)
       return
@@ -168,7 +181,7 @@ class MParticle extends View {
   logout(isLoggedOut) {
     if (this.isMParticleLoaded()) {
       if (isLoggedOut) {
-        mParticle.Identity.logout({}, this.identityCallbackLogout)
+        mParticle.Identity.logout({}, this.identityCallbackLogout.this.bind(this))
       } else {
         mParticle.logError('Logout failed')
       }
@@ -179,12 +192,11 @@ class MParticle extends View {
     if (result.getUser()) {
       // IDSync request succeeded, mutate attributes or query for the MPID as needed
       const logoutAttributes = {
-        ...this.requiredAttribures,
-        category: 'store_page',
+        ...this.requiredAttributes,
+        category: 'account_page',
         action: 'active',
       }
       mParticle.logEvent('account_sign_out', mParticle.EventType.Other, logoutAttributes)
-
       const user = result.getUser()
       console.log(user)
       return

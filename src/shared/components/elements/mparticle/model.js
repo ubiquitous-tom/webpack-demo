@@ -37,7 +37,7 @@ class MParticleModel extends Model {
         planId: 'acorn_web',
         planVersion: 1,
       },
-      appVersion: '0.1',
+      appVersion: '0.1.1',
     }
 
     if (process.env.MP_KEY) {
@@ -130,14 +130,6 @@ class MParticleModel extends Model {
       default:
         console.log(result.body)
     }
-  }
-
-  getLastURL() {
-    const referringUrlWithHash = sessionStorage.getItem('ATVSessionLastURL') || ''
-    console.log('MParticleModel getLastURL', referringUrlWithHash)
-    // Optional: Remove the stored URL after use
-    // sessionStorage.removeItem('ATVSessionLastURL')
-    return referringUrlWithHash
   }
 }
 
