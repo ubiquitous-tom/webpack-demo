@@ -81,7 +81,7 @@ class Workspace extends Router {
 
   logout() {
     console.log('Router loads logout')
-    new Logout()
+    new Logout({ model: this.model })
   }
 
   editAccount() {
