@@ -37,6 +37,20 @@ class Workspace extends Router {
     this.ga = this.context.getContext('ga')
     this.mp = this.context.getContext('mp')
     // Backbone.history.trigger('route', router, name, args);
+
+    this.listenTo(this.model, 'router:executeRoute', (model) => {
+      if (!model.has('Session') || model.get('Session')?.LoggedIn !== true) {
+        console.log('logout')
+        // debugger
+        const signinURL = `${this.model.get('signinEnv')}/signin.jsp?OperationalScenario=STORE`
+        window.location.assign(signinURL)
+      }
+    })
+
+    this.listenTo(this.model, 'signedin:success', () => {
+      // debugger
+      window.location.reload()
+    })
   }
 
   execute(callback, args, name) {
@@ -45,6 +59,8 @@ class Workspace extends Router {
     this.ga.logPageView(name)
     this.mp.logPageView(name)
 
+    // Set the current page URL before we load a new page
+    // to be used as a `last_url` for mParticle user attributes
     sessionStorage.setItem('ATVSessionLastURL', window.location.href)
     this.model.trigger('router:executeRoute', this.model)
 

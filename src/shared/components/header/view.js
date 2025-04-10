@@ -103,7 +103,7 @@ class Header extends View {
 
   logEvent(e) {
     console.log('Header logEvent', e)
-    debugger
+    // debugger
     this.logClickEvent(e)
     if ($(e.currentTarget).attr('class').includes('navbar-right')) {
       const currentClass = $(e.target).attr('class')
@@ -136,13 +136,13 @@ class Header extends View {
 
   logClickEvent(e) {
     console.log('Header logClickEvent', e)
-    debugger
+    // debugger
     this.mp.logClickEvent(e)
   }
 
   logCustomClickEvent(e, customEventName, additionalData) {
     console.log('Header logCustomClickEvent', e, customEventName, additionalData)
-    debugger
+    // debugger
     this.mp.logClickEvent(e, customEventName, additionalData)
   }
 

@@ -8,11 +8,15 @@ class Logout extends View {
     this.context = new BackBoneContext()
     this.mp = this.context.getContext('mp')
 
-    this.model = new LogoutModel()
+    this.logoutModel = new LogoutModel()
     /* eslint no-unused-vars: 0 */
-    this.listenTo(this.model, 'change:isLoggedOut', (model, value, options) => {
+    this.listenTo(this.logoutModel, 'change:isLoggedOut', (model, value, options) => {
       // console.log(model, value, options)
       this.mp.logout(value)
+    })
+
+    this.listenTo(this.model, 'logout:success', () => {
+      // debugger
       window.location.assign('/')
     })
   }

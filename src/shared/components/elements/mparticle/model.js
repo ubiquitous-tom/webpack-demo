@@ -30,14 +30,18 @@ class MParticleModel extends Model {
     console.log('MParticleModel initialize')
     console.log(this.get('model'))
     this.model = this.get('model')
-    this.customerID = this.model.get('Customer')?.CustomerID || ''
-    this.email = this.model.get('Customer')?.Email || ''
+    this.customerID = ''
+    this.email = ''
+    if (this.model.has('Session') && this.model.get('Session')?.LoggedIn) {
+      this.customerID = this.model.get('Customer')?.CustomerID || ''
+      this.email = this.model.get('Customer')?.Email || ''
+    }
     this.config = {
       dataPlan: {
         planId: 'acorn_web',
         planVersion: 1,
       },
-      appVersion: '0.1.1',
+      appVersion: '0.1.2',
     }
 
     if (process.env.MP_KEY) {
@@ -60,8 +64,8 @@ class MParticleModel extends Model {
           email: this.email,
           customerid: this.customerID,
         },
-        identityCallback: this.identityCallback,
       }
+      this.config.identityCallback = this.identityCallback.bind(this)
     }
     console.log('MParticleModel config: ', this.config)
     // mixpanelKit.register(this.config)
@@ -130,6 +134,14 @@ class MParticleModel extends Model {
       default:
         console.log(result.body)
     }
+  }
+
+  getLastURL() {
+    const referringUrlWithHash = sessionStorage.getItem('ATVSessionLastURL') || ''
+    console.log('MParticle getLastURL', referringUrlWithHash)
+    // Optional: Remove the stored URL after use
+    // sessionStorage.removeItem('ATVSessionLastURL')
+    return referringUrlWithHash
   }
 }
 

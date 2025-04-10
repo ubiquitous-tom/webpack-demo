@@ -83,7 +83,7 @@ class Navigation extends View {
 
   logClickEvent(e) {
     console.log('Navigation logClickEvent')
-    debugger
+    // debugger
     this.mp.logClickEvent(e)
   }
 }
