@@ -153,7 +153,7 @@ class MParticle extends View {
   logout(isLoggedOut) {
     if (this.isMParticleLoaded()) {
       if (isLoggedOut) {
-        mParticle.Identity.logout({}, this.identityCallbackLogout.this.bind(this))
+        mParticle.Identity.logout({}, this.identityCallbackLogout.bind(this))
       } else {
         mParticle.logError('Logout failed')
       }
