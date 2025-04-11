@@ -36,7 +36,11 @@
     <div class="row contact-support">
       <div class="col-md-8">
         <span>
+          {{#if isWebPaymentEdit}}
           {{{t "CONTACT-SUPPORT"}}}
+          {{else}}
+          {{{t "CONTACT-SUPPORT-APP-STORE"}}}
+          {{/if}}
         </span>
       </div>
     </div>

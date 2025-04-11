@@ -32,6 +32,7 @@ class AccountInfo extends View {
   render() {
     console.log('AccountInfo render')
     const data = {
+      isWebPaymentEdit: this.model.get('Customer').webPaymentEdit,
       customerName: this.model.get('Customer').Name,
       customerEmail: this.model.get('Customer').Email,
       customerJoinedDate: this.model.get('joinedDate'),

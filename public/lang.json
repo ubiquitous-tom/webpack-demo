@@ -5457,9 +5457,17 @@
             "CONTACT-SUPPORT": {
                 "type": "text",
                 "content": {
-                    "en": "Please contact <a href=\"mailto:support@acorn.tv\">support@acorn.tv<\/a> for any issues related to your account.",
-                    "es": "P\u00f3ngase en contacto con <a href=\"mailto:support@acorn.tv\">support@acorn.tv<\/a> para cualquier problema relacionado con su cuenta.",
-                    "uk": "Please contact <a href=\"mailto:support@acorn.tv\">support@acorn.tv<\/a> for any issues related to your account."
+                    "en": "Need Assistance? Visit <a href=\"https:\/\/support.acorn.tv\/support\/home\">support.acorn.tv<\/a>",
+                    "es": "\u00bfNecesitas ayuda? Visita <a href=\"https:\/\/support.acorn.tv\/support\/home\">support.acorn.tv<\/a>",
+                    "uk": "Need Assistance? Visit <a href=\"https:\/\/support.acorn.tv\/support\/home\">support.acorn.tv<\/a>"
+                }
+            },
+            "CONTACT-SUPPORT-APP-STORE": {
+                "type": "text",
+                "content": {
+                    "en": "Please refer to the app store where you purchased your subscription to manage your subscription and payment settings. Need Assistance? Visit <a href=\"https:\/\/support.acorn.tv\/support\/home\">support.acorn.tv<\/a>",
+                    "es": "Ve a la tienda donde compraste la subscripci\u00f3n para administrar tu subscripci\u00f3n y opciones de pago. \u00bfNecesitas ayuda? Visita <a href=\"https:\/\/support.acorn.tv\/support\/home\">support.acorn.tv<\/a>",
+                    "uk": "Please refer to the app store where you purchased your subscription to manage your subscription and payment settings. Need Assistance? Visit <a href=\"https:\/\/support.acorn.tv\/support\/home\">support.acorn.tv<\/a>"
                 }
             },
             "ACCOUNT-EXISTS-WITH-LINK": {
@@ -5545,9 +5553,9 @@
             "LEGAL-CONSENT-INFORMATION-08-2023": {
                 "type": "text",
                 "content": {
-                    "en": "By clicking the \"Start Your Free Trial\" button, <strong>you agree that after your free trial, Acorn TV will auto-renew your membership at the then-current price (plus taxes) for the plan and the membership term you have selected, until you cancel.<\/strong> You may cancel at any time during your free trial and will not be charged. To cancel, go to Manage account and click \u201cCancel Membership\u201d in the My Acorn TV Settings. There are no refunds or credits for partial or unused months.",
-                    "es": "Al hacer clic en el bot\u00f3n \"Comienza tu prueba gratuita\", <strong>acepta que, una vez finalizada la prueba gratuita, Acorn TV le renueve autom\u00e1ticamente la suscripci\u00f3n al precio vigente en ese momento (m\u00e1s impuestos) para el plan y el plazo de suscripci\u00f3n que haya seleccionado, hasta que la cancele.<\/strong> Puede darse de baja en cualquier momento durante el periodo de prueba gratuito y no se le cobrar\u00e1 nada. Para cancelar, vaya a Administrar mi cuenta y haga clic en \"Cancela tu suscripci\u00f3n\" en la configuraci\u00f3n de Mi Acorn TV. No hay reembolsos ni cr\u00e9ditos por meses parciales o no utilizados.",
-                    "uk": "By clicking the \"Start Your Free Trial\" button, <strong>you agree that after your free trial, Acorn TV will auto-renew your membership at the then-current price (plus taxes) for the plan and the membership term you have selected, until you cancel.<\/strong> You may cancel at any time during your free trial and will not be charged. To cancel, go to Manage account and click \u201cCancel Membership\u201d in the My Acorn TV Settings. There are no refunds or credits for partial or unused months."
+                    "en": "By clicking the \"${var1}\" button, <strong>you agree that after your free trial, Acorn TV will auto-renew your membership at the then-current price (plus taxes) for the plan and the membership term you have selected, until you cancel.<\/strong> You may cancel at any time during your free trial and will not be charged. To cancel, go to Manage account and click \u201cCancel Membership\u201d in the My Acorn TV Settings. There are no refunds or credits for partial or unused months.",
+                    "es": "Al hacer clic en el bot\u00f3n \"${var1}\", <strong>acepta que, una vez finalizada la prueba gratuita, Acorn TV le renueve autom\u00e1ticamente la suscripci\u00f3n al precio vigente en ese momento (m\u00e1s impuestos) para el plan y el plazo de suscripci\u00f3n que haya seleccionado, hasta que la cancele.<\/strong> Puede darse de baja en cualquier momento durante el periodo de prueba gratuito y no se le cobrar\u00e1 nada. Para cancelar, vaya a Administrar mi cuenta y haga clic en \"Cancela tu suscripci\u00f3n\" en la configuraci\u00f3n de Mi Acorn TV. No hay reembolsos ni cr\u00e9ditos por meses parciales o no utilizados.",
+                    "uk": "By clicking the \"${var1}\" button, <strong>you agree that after your free trial, Acorn TV will auto-renew your membership at the then-current price (plus taxes) for the plan and the membership term you have selected, until you cancel.<\/strong> You may cancel at any time during your free trial and will not be charged. To cancel, go to Manage account and click \u201cCancel Membership\u201d in the My Acorn TV Settings. There are no refunds or credits for partial or unused months."
                 }
             },
             "DO-NOT-SELL-OR-SHARE-MY-PERSONAL-INFORMATION": {
@@ -5612,6 +5620,30 @@
                     "en": "You've successfully upgraded to the annual plan",
                     "es": "Has actualizado correctamente al plan anual",
                     "uk": "You've successfully upgraded to the annual plan"
+                }
+            },
+            "SIGN-ME-UP-2025": {
+                "type": "text",
+                "content": {
+                    "en": "Yes! I would like to receive updates, special offers, and newsletters from AcornTV",
+                    "es": "\u00a1S\u00ed! Me gustar\u00eda recibir novedades, ofertas especiales y noticias de AcornTV",
+                    "uk": "Yes! I would like to receive updates, special offers, and newsletters from AcornTV"
+                }
+            },
+            "AGREE-START-FREE-TRIAL": {
+                "type": "text",
+                "content": {
+                    "en": "Agree & Start Free Trial",
+                    "es": "Aceptar y comenzar prueba gratuita",
+                    "uk": "Agree & Start Free Trial"
+                }
+            },
+            "AGREE-SUBSCRIBE": {
+                "type": "text",
+                "content": {
+                    "en": "Agree & Subscribe",
+                    "es": "Aceptar y suscribirme",
+                    "uk": "Agree & Subscribe"
                 }
             }
         }
