@@ -1,6 +1,8 @@
 import { History, Router } from 'backbone'
 import _ from 'underscore'
 import BackBoneContext from 'core/contexts/backbone-context'
+import StripePlans from 'core/models/stripe-plans'
+import InitializeApp from 'core/models/initializedapp'
 
 import Logout from 'shared/elements/logout'
 
@@ -37,19 +39,40 @@ class Workspace extends Router {
     this.ga = this.context.getContext('ga')
     this.mp = this.context.getContext('mp')
     // Backbone.history.trigger('route', router, name, args);
+    this.stripePlans = new StripePlans()
 
     this.listenTo(this.model, 'router:executeRoute', (model) => {
       if (!model.has('Session') || model.get('Session')?.LoggedIn !== true) {
         console.log('logout')
         // debugger
-        const signinURL = `${this.model.get('signinEnv')}/signin.jsp?OperationalScenario=STORE`
-        window.location.assign(signinURL)
+        // const signinURL = `${this.model.get('signinEnv')}/signin.jsp?OperationalScenario=STORE`
+        // window.location.assign(signinURL)
       }
     })
 
     this.listenTo(this.model, 'signedin:success', () => {
-      // debugger
-      window.location.reload()
+      debugger
+      // window.location.reload()
+      // Backbone.history.navigate('accountStatus', { trigger: true })
+      Backbone.history.loadUrl('accountStatus')
+    })
+
+    this.listenTo(this.model, 'global:logoutSuccess', (model, value) => {
+      console.log(model, value)
+      debugger
+      // console.log('global:logoutSuccess before', this.model)
+      const initializeApp = new InitializeApp({ stripePlansModel: this.stripePlans })
+      initializeApp.on('sync', (initializeAppModel) => {
+        this.model.set(initializeAppModel.attributes, { remove: true })
+        // console.log('global:logoutSuccess after', this.model)
+        this.mp.logout(value)
+      })
+    })
+
+    this.listenTo(this.model, 'logout:success', () => {
+      debugger
+      // window.location.assign('/')
+      Backbone.history.navigate('#', { trigger: true })
     })
   }
 

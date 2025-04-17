@@ -105,7 +105,8 @@ class Header extends View {
     console.log('Header logEvent', e)
     // debugger
     this.logClickEvent(e)
-    if ($(e.currentTarget).attr('class').includes('navbar-right')) {
+    const targetClasses = $(e.currentTarget).attr('class')
+    if (targetClasses && targetClasses.includes('navbar-right')) {
       const currentClass = $(e.target).attr('class')
       const currentClassLabel = $(e.target).text().trim()
       let customEventName = ''

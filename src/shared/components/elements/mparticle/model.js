@@ -35,6 +35,11 @@ class MParticleModel extends Model {
     if (this.model.has('Session') && this.model.get('Session')?.LoggedIn) {
       this.customerID = this.model.get('Customer')?.CustomerID || ''
       this.email = this.model.get('Customer')?.Email || ''
+    } else {
+      const currentUser = mParticle.Identity.getCurrentUser()
+      if (currentUser) {
+        mParticle.Identity.logout({}, this.identityCallbackClearUserState.bind(this))
+      }
     }
     this.config = {
       dataPlan: {
@@ -108,6 +113,19 @@ class MParticleModel extends Model {
         user.setUserAttribute('utm_content', urlParams.get('utm_content'))
       }
       console.log(user)
+
+      return
+    }
+
+    this.callbackErrorCode(result)
+  }
+
+  identityCallbackClearUserState(result) {
+    if (result.getUser()) {
+      const user = result.getUser()
+      user.removeAllUserAttributes()
+      console.log(user)
+      this.model.trigger('logout:success')
       return
     }
 

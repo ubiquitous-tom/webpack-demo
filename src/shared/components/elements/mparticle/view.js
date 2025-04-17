@@ -6,8 +6,7 @@ class MParticle extends View {
   initialize(options) {
     if (process.env.MP_KEY) {
       console.log('MParticle initialize')
-      this.model = options.model
-      this.mParticleModel = new MParticleModel({ model: this.model })
+      this.mParticleModel = new MParticleModel({ model: options.model })
       this.requiredAttributes = {}
       this.render()
 

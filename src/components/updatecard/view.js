@@ -72,8 +72,10 @@ class UpdateCard extends View {
     e.preventDefault()
     this.$el.find('#stunning').remove()
     // this.showFooter()
-    window.location.assign('#accountStatus')
-    window.location.reload()
+    // window.location.assign('#accountStatus')
+    // window.location.reload()
+    debugger
+    Backbone.history.navigate('accountStatus', { trigger: true })
   }
 
   // showFooter() {
