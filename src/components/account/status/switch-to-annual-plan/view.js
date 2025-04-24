@@ -106,6 +106,8 @@ class SwitchToAnnualPlan extends View {
     this.promoCode.render()
     this.hideFooter()
 
+    this.specialOfferQ12025()
+
     return this
   }
 
@@ -163,6 +165,32 @@ class SwitchToAnnualPlan extends View {
         day: '2-digit',
       },
     ).format(d) // this.model.formatDate(d)
+  }
+
+  specialOfferQ12025() {
+    if (!this.model.get('Subscription').Trial) {
+      if (!this.model.get('Subscription').Gift) {
+        let offerMonthlyAmount = 0
+        switch (this.model.get('stripePlansCountry')) {
+          case 'US':
+            offerMonthlyAmount = 7
+            break
+          case 'CA':
+            offerMonthlyAmount = 9
+            break
+          default:
+            offerMonthlyAmount = 0
+        }
+        if (offerMonthlyAmount > 0) {
+          const currSymbol = this.model.get('monthlyStripePlan').CurrSymbol
+          const offerHeader = `Limited - Time Offer Less than ${currSymbol}${offerMonthlyAmount}/month When You Upgrade to Annual & Prepay for a Year`
+
+          this.$el.find('.switch-to-annual-plan-container h1')
+            .addClass('limited-time-offer-2025')
+            .text(offerHeader)
+        }
+      }
+    }
   }
 }
 

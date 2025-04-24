@@ -6,9 +6,9 @@
   <div class="col-md-8 banner">
     <p>
       {{#if isTigo}}
-      {{t "MONTHLY-PLAN-RENEWS-ON-TIGO"}}<br />
+        {{t "MONTHLY-PLAN-RENEWS-ON-TIGO"}}<br />
       {{else}}
-      {{t "MONTHLY-PLAN-RENEWS-ON-DATE-PRICE"}}<br />
+        {{t "MONTHLY-PLAN-RENEWS-ON-DATE-PRICE"}}<br />
       {{/if}}
       {{{tagline}}}
     </p>
@@ -29,9 +29,9 @@
         <button type="submit" class="switch-to-annual btn">
           {{t "UPGRADE-TO-ANNUAL"}}
         </button>
-        {{!-- TO DO - Add this message to the translation file (This is being tracked by Fernando Souza) --}}
+
         <span class="promo-code-label">
-          Promo code can be applied at checkout
+          {{t "PROMOCODE-APPLIED-AT-CHECKOUT"}}
         </span>
       </div>
     </div>

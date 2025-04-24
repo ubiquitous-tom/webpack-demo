@@ -70,6 +70,8 @@ class MonthlyPlan extends View {
 
     this.setPresetOptions()
 
+    this.specialOfferQ12025()
+
     return this
   }
 
@@ -175,6 +177,40 @@ class MonthlyPlan extends View {
       this
         .$('.upgrade-to-annual button')
         .click()
+    }
+  }
+
+  specialOfferQ12025() {
+    if (!this.model.get('Subscription').Trial) {
+      if (!this.model.get('Subscription').Gift) {
+        let promoCode = ''
+        let offerMonthlyAmount = 0
+        switch (this.model.get('stripePlansCountry')) {
+          case 'US':
+            promoCode = 'TENOFF25'
+            offerMonthlyAmount = 7
+            break
+          case 'CA':
+            promoCode = 'TENOFF2025'
+            offerMonthlyAmount = 9
+            break
+          default:
+            promoCode = ''
+            offerMonthlyAmount = 0
+        }
+        if (promoCode) {
+          const currSymbol = this.model.get('monthlyStripePlan').CurrSymbol
+          const offerAnnualAmount = this.model.get('annualStripePlan').SubscriptionAmount - 10
+          const offerHeader = `Limited - Time Offer Less than ${currSymbol}${offerMonthlyAmount}/month When You Upgrade to Annual & Prepay for a Year`
+          const specialOfferText = `Use promo code ${promoCode} and upgrade for just ${currSymbol}${offerAnnualAmount}`
+          const offerSpan = $('<span />')
+            .addClass('limited-time-offer-2025')
+            .text(specialOfferText)
+
+          this.$el.find('.upgrade-to-annual h2').text(offerHeader)
+          this.$el.find('.promo-code-label').before(offerSpan)
+        }
+      }
     }
   }
 }

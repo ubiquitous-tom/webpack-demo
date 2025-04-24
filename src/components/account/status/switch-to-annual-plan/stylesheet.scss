@@ -4,12 +4,7 @@
 
 #account .switch-to-annual-plan-container {
   background: rgb(11, 23, 51);
-  background: linear-gradient(
-    180deg,
-    #053E3A 0%,
-    #053E3A 80%,
-    #053E3A 100%
-  );
+  background: linear-gradient(180deg, #053e3a 0%, #053e3a 80%, #053e3a 100%);
   height: 100vh;
   width: 100vw;
   // font-family: futura-pt, sans-serif;
@@ -41,6 +36,11 @@
     font-size: 4rem;
     line-height: 5rem;
     letter-spacing: 0.5px;
+
+    &.limited-time-offer-2025 {
+      width: 40%;
+      display: inline-block;
+    }
   }
 
   p {
@@ -75,7 +75,7 @@
     text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1),
       inset 0px 4px 4px rgba(255, 255, 255, 0.09);
-    background: #EEF0E9;
+    background: #eef0e9;
     color: #000;
 
     &:disabled {
@@ -128,6 +128,9 @@
     }
     .legal-notice {
       max-width: 30rem;
+    }
+    h1.limited-time-offer-2025 {
+      width: 100%;
     }
   }
   #promocode-container {
