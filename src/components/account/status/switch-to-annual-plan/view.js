@@ -106,7 +106,7 @@ class SwitchToAnnualPlan extends View {
     this.promoCode.render()
     this.hideFooter()
 
-    this.specialOfferQ12025()
+    // this.specialOfferQ12025()
 
     return this
   }

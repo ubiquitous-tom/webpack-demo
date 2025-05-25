@@ -70,7 +70,7 @@ class MonthlyPlan extends View {
 
     this.setPresetOptions()
 
-    this.specialOfferQ12025()
+    // this.specialOfferQ12025()
 
     return this
   }
