@@ -1694,6 +1694,14 @@
                     "uk": "Edit Billing"
                 }
             },
+            "STATE-NO-ASTERISK": {
+                "type": "text",
+                "content": {
+                    "en": "State",
+                    "es": "Estado",
+                    "uk": "State"
+                }
+            },
             "COUNTRY-NO-ASTERISK": {
                 "type": "text",
                 "content": {
@@ -4694,12 +4702,20 @@
                     "uk": "Your gift code is applied"
                 }
             },
-            "YOU-WILL-BE-CHARDGED": {
+            "YOU-WILL-BE-CHARGED": {
                 "type": "text",
                 "content": {
                     "en": "You will be charged {{ symbol }} {{ subscriptionAmount }}  for a {{ typePlan }} membership on {{ paidCommencementDate }}. Cancel anytime.",
                     "es": "Se le cobrar\u00e1 {{ symbol }} {{ subscriptionAmount }}  por la membres\u00eda {{ typePlan }} el {{ paidCommencementDate }}. Cancela en cualquier momento.",
                     "uk": "You will be charged {{ symbol }} {{ subscriptionAmount }}  for a {{ typePlan }} membership on {{ paidCommencementDate }}. Cancel anytime."
+                }
+            },
+            "YOU-WILL-BE-CHARGED-2025": {
+                "type": "text",
+                "content": {
+                    "en": "You will be charged <strong>%{symbol}%{subscriptionAmount}<\/strong> for %{typePlan} plan on %{paidCommencementDate}. Cancel before %{cancelBeforeDate} to avoid recurrent charges.",
+                    "es": "Se le cobrar\u00e1 <strong>%{symbol}%{subscriptionAmount}<\/strong> por el plan %{typePlan} el %{paidCommencementDate}. Cancela antes del %{cancelBeforeDate} para evitar cargos recurrentes.",
+                    "uk": "You will be charged <strong>%{symbol}%{subscriptionAmount}<\/strong> for %{typePlan} plan on %{paidCommencementDate}. Cancel before %{cancelBeforeDate} to avoid recurrent charges."
                 }
             },
             "ALL-TAXES-APPLY": {
@@ -4812,6 +4828,14 @@
                     "en": "Please agree to all the terms and conditions to create an account.",
                     "es": "Acepte todos los t\u00e9rminos y condiciones para crear una cuenta.",
                     "uk": "Please agree to all the terms and conditions to create an account."
+                }
+            },
+            "INVALID-STATE-ERROR": {
+                "type": "text",
+                "content": {
+                    "en": "Oops! Looks like you may have entered some information incorrectly. Please provide your State.",
+                    "es": "Ups! Parece que la informaci\u00f3n que ingresaste es incorrecta. Por favor seleccion\u00e1 tu estado",
+                    "uk": "Oops! Looks like you may have entered some information incorrectly. Please provide your State."
                 }
             },
             "INVALID-POSTALCODE-ERROR": {
@@ -5644,6 +5668,94 @@
                     "en": "Agree & Subscribe",
                     "es": "Aceptar y suscribirme",
                     "uk": "Agree & Subscribe"
+                }
+            },
+            "CONSENT-CHECKBOX-2025": {
+                "type": "text",
+                "content": {
+                    "en": "I agree to the subscription terms below",
+                    "es": "Acepto los t\u00e9rminos de suscripci\u00f3n que se detallan a continuaci\u00f3n",
+                    "uk": "I agree to the subscription terms below"
+                }
+            },
+            "CONSENT-LEGAL-2025": {
+                "type": "text",
+                "content": {
+                    "en": "After your free trial, Acorn TV will auto-renew your subscription at the then-current price (plus taxes) for the plan and the subscription term you have selected, until you cancel. You may cancel at any time during your free trial and will not be charged. To cancel, go to Settings and click \"Cancel\" on the Subscription tab. There are no refunds or credits for partial or unused months.",
+                    "es": "Despu\u00e9s de la prueba gratuita, Acorn TV renovar\u00e1 autom\u00e1ticamente tu suscripci\u00f3n al precio vigente en ese momento (m\u00e1s impuestos) para el plan y el plazo de suscripci\u00f3n que hayas seleccionado, hasta que la canceles. Podes cancelar en cualquier momento durante la prueba gratuita y no se cobrar\u00e1. Para cancelar, anda a Administrar mi cuenta  en las opciones de Mi Acorn TV y hace click en \u00abCancela tu subscripci\u00f3n\u00bb . No hay reembolsos ni cr\u00e9ditos por meses parcialmente o no utilizados.",
+                    "uk": "After your free trial, Acorn TV will auto-renew your subscription at the then-current price (plus taxes) for the plan and the subscription term you have selected, until you cancel. You may cancel at any time during your free trial and will not be charged. To cancel, go to Settings and click \"Cancel\" on the Subscription tab. There are no refunds or credits for partial or unused months."
+                }
+            },
+            "TOTAL-TEXT-ONLY": {
+                "type": "text",
+                "content": {
+                    "en": "Total",
+                    "es": "Total",
+                    "uk": "Total"
+                }
+            },
+            "TAX-TEXT-ONLY": {
+                "type": "text",
+                "content": {
+                    "en": "Tax",
+                    "es": "VAT",
+                    "uk": "Tax"
+                }
+            },
+            "WORLDCLASS-TV-2025": {
+                "type": "text",
+                "content": {
+                    "en": "Brilliant Mysteries",
+                    "es": "Misterios brillantes",
+                    "uk": "Brilliant Mysteries"
+                }
+            },
+            "ACORNTV-STREAMS-2025": {
+                "type": "text",
+                "content": {
+                    "en": "Acorn TV is the go-to streaming destination for thrilling mysteries and suspense-driven dramas. Experience the world\u2019s best stories, from the criminally cozy to the daringly dark. Get wrapped up in mystery.",
+                    "es": "Acorn TV es la plataforma de streaming para disfrutar de misterios apasionantes y dramas llenos de suspenso. Vive las mejores historias del mundo, desde las m\u00e1s acogedoras hasta las m\u00e1s oscuras y atrevidas. D\u00e9jate envolver por el misterio.",
+                    "uk": "Acorn TV is the go-to streaming destination for thrilling mysteries and suspense-driven dramas. Experience the world\u2019s best stories, from the criminally cosy to the daringly dark. Get wrapped up in mystery."
+                }
+            },
+            "GIFT-PURCHASE-2025": {
+                "type": "text",
+                "content": {
+                    "en": "Your gift purchase entitles the recipient to a one-year Acorn TV membership. They'll enjoy thrilling mysteries and suspense-driven dramas \u2014 all world class, all in one place. ",
+                    "es": "La compra de tu regalo le brinda al destinatario una membres\u00eda de Acorn TV por un a\u00f1o. Va a poder disfrutar de misterios emocionantes y dramas llenos de suspenso \u2014 todo de clase mundial, todo en un mismo lugar.",
+                    "uk": "Your gift purchase entitles the recipient to a one-year Acorn TV membership. They'll enjoy thrilling mysteries and suspense-driven dramas \u2014 all world class, all in one place. "
+                }
+            },
+            "SHARE-BRITISH-TV-2025": {
+                "type": "text",
+                "content": {
+                    "en": "Share brilliant mysteries.",
+                    "es": "Comparte misterios fascinantes.",
+                    "uk": "Share brilliant mysteries."
+                }
+            },
+            "GIFT-PURCHASE-ENTITLEMENT-2025": {
+                "type": "text",
+                "content": {
+                    "en": "Your gift purchase entitles the recipient to a one-year Acorn TV membership. They'll enjoy a collection of thrilling mysteries and suspense-driven dramas \u2014all in one place, commercial-free. ",
+                    "es": "Tu regalo es un a\u00f1o completo de suscripci\u00f3n a Acorn TV. Disfrutar\u00e1 de una colecci\u00f3n de emocionantes misterios y dramas llenos de suspenso, todo en un solo lugar y sin anuncios.",
+                    "uk": "Your gift purchase entitles the recipient to a one-year Acorn TV membership. They'll enjoy a collection of thrilling mysteries and suspense-driven dramas \u2014 all in one place, advert-free."
+                }
+            },
+            "GIFT-MEMBERSHIP-2025": {
+                "type": "text",
+                "content": {
+                    "en": "Acorn TV Gift Membership",
+                    "es": "Regala una suscripci\u00f3n de Acorn TV",
+                    "uk": "Acorn TV Gift Membership"
+                }
+            },
+            "YEAR-UNLIMITED-ACCESS-2025": {
+                "type": "text",
+                "content": {
+                    "en": "Give 12 months of unlimited access to the best TV",
+                    "es": "Regala 12 meses de acceso ilimitado a la mejor televisi\u00f3n brit\u00e1nica",
+                    "uk": "Give 12 months of unlimited access to the best TV"
                 }
             }
         }
