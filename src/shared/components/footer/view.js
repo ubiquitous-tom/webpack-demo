@@ -18,7 +18,7 @@ class Footer extends View {
 
   get events() {
     return {
-      'change #atvLocale': 'updateLanguage',
+      // 'change #atvLocale': 'updateLanguage',
       'click .open-dialog': 'openDialog',
     }
   }
